@@ -3,15 +3,10 @@ package ahu.bigdata.huiculture;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
-
-import ahu.bigdata.huiculture.fragment.BaseFragment;
+import ahu.bigdata.huiculture.activity.base.BaseActivity;
 import ahu.bigdata.huiculture.fragment.home.CloudFragment;
 import ahu.bigdata.huiculture.fragment.home.HomeFragment;
 import ahu.bigdata.huiculture.fragment.home.PersonFragment;
@@ -19,7 +14,7 @@ import ahu.bigdata.huiculture.fragment.home.PersonFragment;
 /**
  * 创建所有Fragment，Fragment的切换
  */
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends BaseActivity {
     /**
      * BottomNavigationView
      */
