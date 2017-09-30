@@ -26,7 +26,6 @@ import okhttp3.Response;
 public class CommonJsonCallback implements Callback {
 
     /**
-     * 与服务器返回的字段一个的对应关系
      * the logic layer exception, may alter in different app
      */
     protected final String RESULT_CODE = "ecode"; // 有返回则对于http请求来说是成功的，但还有可能是业务逻辑上的错误
@@ -38,7 +37,6 @@ public class CommonJsonCallback implements Callback {
     // set-cookie2
 
     /**
-     * 自定义异常类型
      * the java layer exception, do not same to the logic error
      */
     protected final int NETWORK_ERROR = -1; // the network relative error
@@ -48,7 +46,7 @@ public class CommonJsonCallback implements Callback {
     /**
      * 将其它线程的数据转发到UI线程
      */
-    private Handler mDeliveryHandler;//进行消息的转发，将子线程的消息转发到UI线程
+    private Handler mDeliveryHandler;
     private DisposeDataListener mListener;
     private Class<?> mClass;
 
@@ -71,10 +69,8 @@ public class CommonJsonCallback implements Callback {
         });
     }
 
-    //真正的相应处理函数
     @Override
     public void onResponse(final Call call, final Response response) throws IOException {
-        //Json的处理
         final String result = response.body().string();
         final ArrayList<String> cookieLists = handleCookie(response.headers());
         mDeliveryHandler.post(new Runnable() {
@@ -101,12 +97,7 @@ public class CommonJsonCallback implements Callback {
         return tempList;
     }
 
-    /**
-     * 处理服务器返回的响应数据
-     */
     private void handleResponse(Object responseObj) {
-
-        //为了保证代码的健壮性
         if (responseObj == null || responseObj.toString().trim().equals("")) {
             mListener.onFailure(new OkHttpException(NETWORK_ERROR, EMPTY_MSG));
             return;
@@ -117,31 +108,17 @@ public class CommonJsonCallback implements Callback {
              * 协议确定后看这里如何修改
              */
             JSONObject result = new JSONObject(responseObj.toString());
-            //开始尝试解析
-            if (result.has(RESULT_CODE)) {
-                //从Json对象中取出响应码，若为0，则是正确的响应。
-                if (result.getInt(RESULT_CODE) == RESULT_CODE_VALUE) {
-                    //不需要解析
-                    if (mClass == null) {
-                        mListener.onSuccess(responseObj);
-                    } else {
-                        //需要我们将实体转化成实体对象
-                        Object obj = ResponseEntityToModule.parseJsonObjectToModule(result, mClass);
-                        //表明正确的转化成了实体对象
-                        if (obj != null) {
-                            mListener.onSuccess(obj);
-                        } else {
-                            //返回的不是合法的Json
-                            mListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
-                        }
-                    }
-                }
+            if (mClass == null) {
+                mListener.onSuccess(result);
             } else {
-                //将服务器返回给我们的异常回调到应用中处理
-                mListener.onFailure(new OkHttpException(OTHER_ERROR, result));
+                Object obj = ResponseEntityToModule.parseJsonObjectToModule(result, mClass);
+                if (obj != null) {
+                    mListener.onSuccess(obj);
+                } else {
+                    mListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
+                }
             }
         } catch (Exception e) {
-            //健壮性
             mListener.onFailure(new OkHttpException(OTHER_ERROR, e.getMessage()));
             e.printStackTrace();
         }
