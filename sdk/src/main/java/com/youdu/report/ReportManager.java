@@ -1,5 +1,6 @@
 package com.youdu.report;
 
+import com.youdu.adutil.Utils;
 import com.youdu.module.monitor.Monitor;
 import com.youdu.okhttp.CommonOkHttpClient;
 import com.youdu.okhttp.HttpConstant;
@@ -8,7 +9,6 @@ import com.youdu.okhttp.listener.DisposeDataHandle;
 import com.youdu.okhttp.listener.DisposeDataListener;
 import com.youdu.okhttp.request.CommonRequest;
 import com.youdu.okhttp.request.RequestParams;
-import com.youdu.adutil.Utils;
 
 import java.util.ArrayList;
 

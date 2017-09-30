@@ -7,8 +7,8 @@ import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.youdu.core.BaseRenderer;
 import com.youdu.adutil.ImageLoaderUtil;
+import com.youdu.core.BaseRenderer;
 
 
 /**

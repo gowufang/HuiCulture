@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.view.ViewGroup;
 
 import com.youdu.activity.AdBrowserActivity;
+import com.youdu.adutil.ResponseEntityToModule;
+import com.youdu.adutil.Utils;
 import com.youdu.core.AdContextInterface;
 import com.youdu.core.video.VideoAdSlot.AdSDKSlotListener;
 import com.youdu.module.AdValue;
 import com.youdu.okhttp.HttpConstant;
 import com.youdu.okhttp.HttpConstant.Params;
 import com.youdu.report.ReportManager;
-import com.youdu.adutil.ResponseEntityToModule;
-import com.youdu.adutil.Utils;
 import com.youdu.widget.CustomVideoView.ADFrameImageLoadListener;
 
 /**

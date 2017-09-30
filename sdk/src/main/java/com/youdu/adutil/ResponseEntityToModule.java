@@ -10,7 +10,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import io.realm.RealmList;
-import io.realm.RealmModel;
 import io.realm.RealmObject;
 
 /**********************************************************
