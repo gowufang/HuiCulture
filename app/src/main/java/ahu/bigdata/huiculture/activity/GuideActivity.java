@@ -1,4 +1,4 @@
-package ahu.bigdata.huiculture.ui;
+package ahu.bigdata.huiculture.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ahu.bigdata.huiculture.MainActivity;
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
 import ahu.bigdata.huiculture.utils.L;
@@ -100,7 +99,7 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
             /*点击进入主页或者跳过*/
             case R.id.btn_start:
             case R.id.iv_back:
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this,HomeActivity.class));
                 finish();
                 break;
         }

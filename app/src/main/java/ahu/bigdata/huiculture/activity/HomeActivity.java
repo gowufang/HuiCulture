@@ -1,4 +1,4 @@
-package ahu.bigdata.huiculture;
+package ahu.bigdata.huiculture.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+
+import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
 import ahu.bigdata.huiculture.fragment.home.CloudFragment;
 import ahu.bigdata.huiculture.fragment.home.HomeFragment;
@@ -14,7 +16,7 @@ import ahu.bigdata.huiculture.fragment.home.PersonFragment;
 /**
  * 创建所有Fragment，Fragment的切换
  */
-public class MainActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity {
     /**
      * BottomNavigationView
      */
@@ -30,7 +32,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
+        setContentView(R.layout.activity_home);
         initData();
         initView();
     }
@@ -44,8 +47,9 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.content, mHomeFragment);
         fragmentTransaction.commit();
-    }
 
+
+    }
     private void initView() {
 
         /**

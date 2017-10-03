@@ -3,4 +3,5 @@
     <string name="title_home">Home</string>
     <string name="title_cloud">Cloud</string>
     <string name="title_person">Person</string>
+    <string name="home_edittext_hint">请输入关键字</string>
 </resources>

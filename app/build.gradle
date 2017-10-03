@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'realm-android'
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "ahu.bigdata.huiculture"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -21,12 +21,13 @@ android {
     productFlavors {
     }
 }
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile project(':sdk')
+    //依赖library原工程
     compile 'com.android.support:appcompat-v7:25.+'
     compile 'com.android.support:design:25.+'
     compile 'com.android.support:support-vector-drawable:25.+'
@@ -34,4 +35,8 @@ dependencies {
     compile 'com.android.support:design:25.0.0'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+}
+
+repositories {
+    flatDir { dirs 'libs' }
 }

@@ -1,9 +1,11 @@
 package ahu.bigdata.huiculture.activity.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.view.WindowManager;
+
+import ahu.bigdata.huiculture.R;
 
 /**
  * Created by ych10 on 2017/9/21.
@@ -17,9 +19,28 @@ public class BaseActivity extends AppCompatActivity {
     public String TAG;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TAG = getComponentName().getClassName();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        /**
+//         *显示箭头返回
+//         */
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    //菜单栏
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home:
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

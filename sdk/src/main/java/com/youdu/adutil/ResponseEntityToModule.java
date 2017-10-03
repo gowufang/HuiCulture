@@ -9,6 +9,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 
