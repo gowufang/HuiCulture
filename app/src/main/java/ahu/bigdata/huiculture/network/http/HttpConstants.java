@@ -10,7 +10,7 @@ public class HttpConstants {
     /**
      * 方便切换服务器地址
      */
-    private static final String ROOT_URL = "http://imooc.com/api";
+    private static final String ROOT_URL = "http://ych.com/api";
 
     /**
      * 请求本地产品列表

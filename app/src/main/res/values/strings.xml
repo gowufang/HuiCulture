@@ -4,4 +4,7 @@
     <string name="title_cloud">Cloud</string>
     <string name="title_person">Person</string>
     <string name="home_edittext_hint">请输入关键字</string>
+    <string name="cancel">取消</string>
+    <string name="search_history">搜索历史</string>
+    <string name="cpay_keyboard_clear">清楚</string>
 </resources>

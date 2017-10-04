@@ -1,5 +1,6 @@
 package ahu.bigdata.huiculture.fragment.home;
 
+import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -17,6 +18,7 @@ import com.youdu.okhttp.CommonOkHttpClient;
 import com.youdu.okhttp.listener.DisposeDataListener;
 
 import ahu.bigdata.huiculture.R;
+import ahu.bigdata.huiculture.activity.SearchActivity;
 import ahu.bigdata.huiculture.constant.Constant;
 import ahu.bigdata.huiculture.fragment.BaseFragment;
 import ahu.bigdata.huiculture.network.http.RequestCenter;
@@ -105,7 +107,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 }
                 break;
             case R.id.search_view:
-
+                Intent searchIntent = new Intent(mContext, SearchActivity.class);
+                mContext.startActivity(searchIntent);
                 break;
             case R.id.category_view:
                 break;
