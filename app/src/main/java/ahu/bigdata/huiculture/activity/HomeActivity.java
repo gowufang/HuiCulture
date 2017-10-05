@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
@@ -32,7 +34,6 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
         initData();
         initView();
@@ -47,7 +48,11 @@ public class HomeActivity extends BaseActivity {
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.content, mHomeFragment);
         fragmentTransaction.commit();
-
+        /**
+         *状态栏、ActionBar设置
+         */
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //显示状态栏
+        getSupportActionBar().hide();//隐藏ActionBar
 
     }
     private void initView() {

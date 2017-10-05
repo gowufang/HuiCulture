@@ -1,36 +1,12 @@
 package ahu.bigdata.huiculture.module.recommand;
 
-import com.youdu.module.monitor.Monitor;
-import com.youdu.module.monitor.emevent.EMEvent;
-
-import java.util.ArrayList;
-
 /**
  * Created by ych10 on 2017/10/3.
- * Function:搜索实体类
+ * Function:最外层实体类
  */
 public class BaseRecommandModel {
-
-    public int type;
-    public String logo;
-    public String title;
-    public String info;
-    public String price;
-    public String text;
-    public String site;
-    public String from;
-    public String zan;
-    public ArrayList<String> url;
-
-    //视频专用
-    public String thumb;
-    public String resource;
-    public String resourceID;
-    public String adid;
-    public ArrayList<Monitor> startMonitor;
-    public ArrayList<Monitor> middleMonitor;
-    public ArrayList<Monitor> endMonitor;
-    public String clickUrl;
-    public ArrayList<Monitor> clickMonitor;
-    public EMEvent event;
+    //保证Json中与实际的Key完全一样，反射
+    public String ecode;
+    public String emsg;
+    public RecommandModel data;
 }
