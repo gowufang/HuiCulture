@@ -33,7 +33,4 @@ public class Constant {
     public static String APP_PHOTO_DIR = Environment.
             getExternalStorageDirectory().getAbsolutePath().
             concat("/imooc_business/photo/");
-
-
-    public static String URL=""
 }
