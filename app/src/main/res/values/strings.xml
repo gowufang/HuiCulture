@@ -7,4 +7,8 @@
     <string name="cancel">取消</string>
     <string name="search_history">搜索历史</string>
     <string name="cpay_keyboard_clear">清楚</string>
+    <string name="video">视频</string>
+    <string name="tian_qian">天前</string>
+    <string name="dian_zan">点赞</string>
+    <string name="where">来自北京</string>
 </resources>
