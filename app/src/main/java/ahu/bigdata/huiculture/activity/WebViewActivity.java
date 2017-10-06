@@ -43,9 +43,9 @@ public class WebViewActivity extends BaseActivity {
 
         //进行加载网页的逻辑
         mWebView.getSettings().setJavaScriptEnabled(true);
-//        //支持缩放
-//        mWebView.getSettings().setSupportZoom(true);
-//        mWebView.getSettings().setBuiltInZoomControls(true);
+        //支持缩放
+        mWebView.getSettings().setSupportZoom(true);
+        mWebView.getSettings().setBuiltInZoomControls(true);
         //接口回调
         mWebView.setWebChromeClient(new WebViewClient());
         //加载网页
