@@ -5,125 +5,73 @@
 >
 
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00000"
+        android:drawable="@drawable/page_loading_01"
         android:duration="70"
         />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00001"
+        android:drawable="@drawable/page_loading_02"
         android:duration="70"
         />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00002"
+        android:drawable="@drawable/page_loading_03"
         android:duration="70"
         />
 
 
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00003"
+        android:drawable="@drawable/page_loading_01"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00004"
+        android:drawable="@drawable/page_loading_02"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00005"
+        android:drawable="@drawable/page_loading_03"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00006"
+        android:drawable="@drawable/page_loading_04"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00007"
+        android:drawable="@drawable/page_loading_05"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00008"
+        android:drawable="@drawable/page_loading_06"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00009"
+        android:drawable="@drawable/page_loading_07"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00010"
+        android:drawable="@drawable/page_loading_08"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00011"
+        android:drawable="@drawable/page_loading_09"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00012"
+        android:drawable="@drawable/page_loading_10"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00013"
+        android:drawable="@drawable/page_loading_11"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00014"
+        android:drawable="@drawable/page_loading_12"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00015"
+        android:drawable="@drawable/page_loading_13"
         android:duration="70"
     />
     <item
-        android:drawable="@drawable/xadsdk_loading_v2_00016"
+        android:drawable="@drawable/page_loading_14"
         android:duration="70"
     />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00017"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00018"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00019"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00020"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00021"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00022"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00023"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00024"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00025"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00026"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00027"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00028"
-        android:duration="70"
-        />
-    <item
-        android:drawable="@drawable/xadsdk_loading_v2_00029"
-        android:duration="70"
-        />
 </animation-list>

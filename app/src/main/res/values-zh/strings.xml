@@ -5,6 +5,4 @@
     <string name="title_person">个人</string>
     <string name="home_edittext_hint">请输入关键字</string>
     <string name="search_history">搜索历史</string>
-    <string name="video">视频</string>
-    <string name="tian_qian">天前</string>
 </resources>

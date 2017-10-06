@@ -1,8 +1,11 @@
 package ahu.bigdata.huiculture.fragment.home;
 
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +14,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.youdu.okhttp.CommonOkHttpClient;
 import com.youdu.okhttp.listener.DisposeDataListener;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.SearchActivity;
-import ahu.bigdata.huiculture.adapter.CourseAdapter;
 import ahu.bigdata.huiculture.constant.Constant;
 import ahu.bigdata.huiculture.fragment.BaseFragment;
-import ahu.bigdata.huiculture.module.recommand.BaseRecommandModel;
 import ahu.bigdata.huiculture.network.http.RequestCenter;
 import ahu.bigdata.huiculture.utils.L;
 
@@ -38,11 +40,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private ImageView mLoadingView;
     private ListView mListView;
 
-    /**
-     *data
-     */
-    private CourseAdapter mAdapter;
-    private BaseRecommandModel mRecommandData;
     public HomeFragment() {
     }
 
@@ -59,11 +56,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             public void onSuccess(Object responseObj) {
                 //完成真正逻辑
                 L.e(L.TAG+"------Success:------"+responseObj.toString());
-                /**
-                 *获取数据后更新UI
-                 */
-                mRecommandData = (BaseRecommandModel) responseObj;
-                showSuccessView();
             }
 
             @Override
@@ -72,26 +64,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 L.e(L.TAG+"------OnFailure:-------:"+reasonObj.toString());
             }
         });
-
-    }
-
-    private void showSuccessView() {
-
-        //判断数据是否为空
-        if (mRecommandData.data.list != null && mRecommandData.data.list.size()>0) {
-            mLoadingView.setVisibility(View.GONE);
-            mListView.setVisibility(View.VISIBLE);
-            mAdapter = new CourseAdapter(mContext,mRecommandData.data.list);
-            mListView.setAdapter(mAdapter);
-
-        } else {
-            showErrorView();
-        }
-
-    }
-
-    private void showErrorView() {
-
 
     }
 

@@ -13,7 +13,6 @@ import java.util.List;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.module.wechat.WeChatData;
-import ahu.bigdata.huiculture.utils.ImageLoaderManager;
 import ahu.bigdata.huiculture.utils.PicassoUtils;
 
 /**
@@ -69,12 +68,11 @@ public class WechatAdapter extends BaseAdapter {
         data = mList.get(i);
         viewHolder.tv_source.setText(data.getSource());
         viewHolder.tv_title.setText(data.getTitle());
-//        /**
-//         *加载Picasso
-//         */
-//        PicassoUtils.loadImagViewSize(mContex,data.getImgUrl(),200,200,viewHolder.iv_img);
+        /**
+         *加载Picasso
+         */
+        PicassoUtils.loadImagViewSize(mContex,data.getImgUrl(),200,200,viewHolder.iv_img);
 
-        ImageLoaderManager.getInstance(mContex).displayImage(viewHolder.iv_img,data.getImgUrl());
         return view;
     }
     class ViewHolder{

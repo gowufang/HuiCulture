@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
 
@@ -80,6 +79,7 @@ public class RmFrag extends BaseFragment {
 
     private void parseJson(String t) {
         try {
+
             JSONObject jsonObject = new JSONObject(t);
             JSONObject jsonresult = jsonObject.getJSONObject("result");
             JSONArray jsonlist = jsonresult.getJSONArray("list");
