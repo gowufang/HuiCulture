@@ -74,6 +74,8 @@
         <activity
             android:theme="@style/FullScreen"
             android:name=".activity.GuideActivity"/>
+        <!--网页详情页-->
+        <activity android:name=".activity.WebViewActivity"></activity>
     </application>
 
 </manifest>

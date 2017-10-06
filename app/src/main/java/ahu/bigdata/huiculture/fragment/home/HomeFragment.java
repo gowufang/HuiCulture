@@ -55,13 +55,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onSuccess(Object responseObj) {
                 //完成真正逻辑
-                L.e(L.TAG+"Success:"+responseObj.toString());
+                L.e(L.TAG+"------Success:------"+responseObj.toString());
             }
 
             @Override
             public void onFailure(Object reasonObj) {
                 //提示用户网络有问题
-                L.e(L.TAG+"------OnFailure-------:"+reasonObj.toString());
+                L.e(L.TAG+"------OnFailure:-------:"+reasonObj.toString());
             }
         });
 

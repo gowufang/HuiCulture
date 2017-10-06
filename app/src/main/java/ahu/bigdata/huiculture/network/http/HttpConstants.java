@@ -1,10 +1,13 @@
 package ahu.bigdata.huiculture.network.http;
 
+import ahu.bigdata.huiculture.constant.Constant;
+
 /**
  * Created by ych10 on 2017/10/3.
  * Function:所有请求相关地址
  */
 public class HttpConstants {
+
 
 
     /**

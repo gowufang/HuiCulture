@@ -15,6 +15,9 @@ public class Constant {
     public static final String SHARE_IS_FIRST = "isFrst";
     //Bugly key
     public static final String BUGLY_APP_ID="97e1c61a8d";
+    //微信精选key
+    public static final String WECHAT_KEY="e7db9fe647fdfaade42f16f60b90dbaf";
+
 
     /**
      * 权限常量相关
