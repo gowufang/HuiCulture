@@ -19,8 +19,10 @@ import com.youdu.okhttp.listener.DisposeDataListener;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.SearchActivity;
+import ahu.bigdata.huiculture.adapter.CourseAdapter;
 import ahu.bigdata.huiculture.constant.Constant;
 import ahu.bigdata.huiculture.fragment.BaseFragment;
+import ahu.bigdata.huiculture.module.recommand.BaseRecommandModel;
 import ahu.bigdata.huiculture.network.http.RequestCenter;
 import ahu.bigdata.huiculture.utils.L;
 
@@ -40,6 +42,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private ImageView mLoadingView;
     private ListView mListView;
 
+    /**
+     * data
+     */
+    private BaseRecommandModel mRecommanddata;
+    private CourseAdapter mAdapter;
     public HomeFragment() {
     }
 
@@ -56,6 +63,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             public void onSuccess(Object responseObj) {
                 //完成真正逻辑
                 L.e(L.TAG+"------Success:------"+responseObj.toString());
+                /**
+                 *获取数据，更新UI
+                 */
+                mRecommanddata = (BaseRecommandModel) responseObj;
+                showSuccessView();
+
             }
 
             @Override
@@ -64,6 +77,32 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 L.e(L.TAG+"------OnFailure:-------:"+reasonObj.toString());
             }
         });
+
+    }
+
+    /**
+     * 请求成功
+     */
+    private void showSuccessView() {
+
+        if (mRecommanddata != null && mRecommanddata.data.list.size() > 0) {
+
+            mLoadingView.setVisibility(View.GONE);
+            //创建Adapter
+            mAdapter = new CourseAdapter(mContext,mRecommanddata.data.list);
+            mListView.setAdapter(mAdapter);
+        } else {
+            showErrorView();
+        }
+
+    }
+
+    /**
+     * 请求失败
+     */
+    private void showErrorView() {
+
+
 
     }
 
