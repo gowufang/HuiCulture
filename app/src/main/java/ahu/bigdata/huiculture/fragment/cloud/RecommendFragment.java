@@ -29,7 +29,7 @@ import ahu.bigdata.huiculture.utils.L;
  * Created by YCH on 2017/10/6.
  * Function:推荐界面
  */
-public class RmFrag extends BaseFragment {
+public class RecommendFragment extends BaseFragment {
 
 
     /**

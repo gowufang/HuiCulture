@@ -12,11 +12,11 @@ import ahu.bigdata.huiculture.fragment.BaseFragment;
  * Created by YCH on 2017/10/6.
  * Function:历史
  */
-public class HisFrag extends BaseFragment {
+public class HistoryFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_person, null);
+        View view = inflater.inflate(R.layout.fragment_history, null);
         return view;
     }
 }

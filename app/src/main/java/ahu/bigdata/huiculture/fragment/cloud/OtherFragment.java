@@ -9,17 +9,16 @@ import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.fragment.BaseFragment;
 
 /**
- * Created by YCH on 2017/10/6.
+ * Created by YCH on 2017/10/7.
  * Function:
  */
-public class TechFrag extends BaseFragment{
+public class OtherFragment extends BaseFragment {
 
-
+    private View mContentView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_person, null);
-        return view;
-
+        mContext = getActivity();
+        mContentView = inflater.inflate(R.layout.fragment_other, null);
+        return mContentView;
     }
 }

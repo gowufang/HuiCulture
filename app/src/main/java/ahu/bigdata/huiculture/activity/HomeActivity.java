@@ -1,12 +1,14 @@
 package ahu.bigdata.huiculture.activity;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
-import android.view.Window;
+import android.view.View;
 import android.view.WindowManager;
 
 import ahu.bigdata.huiculture.R;
@@ -40,6 +42,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void initData() {
+
         /**
          * 添加默认显示的Fragment
          */
@@ -51,7 +54,16 @@ public class HomeActivity extends BaseActivity {
         /**
          *状态栏、ActionBar设置
          */
+        //取消状态栏透明
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //显示状态栏
+        //添加Flag把状态栏设为可绘制模式
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        //设置系统状态栏处于可见状态
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //设置状栏颜色为灰色
+            getWindow().setStatusBarColor(Color.GRAY);
+        }
         getSupportActionBar().hide();//隐藏ActionBar
 
     }

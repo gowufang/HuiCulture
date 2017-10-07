@@ -7,7 +7,6 @@ import com.youdu.okhttp.listener.DisposeDownloadListener;
 import com.youdu.okhttp.request.CommonRequest;
 import com.youdu.okhttp.request.RequestParams;
 
-import ahu.bigdata.huiculture.fragment.cloud.RmFrag;
 import ahu.bigdata.huiculture.module.recommand.BaseRecommandModel;
 import ahu.bigdata.huiculture.module.update.UpdateModel;
 

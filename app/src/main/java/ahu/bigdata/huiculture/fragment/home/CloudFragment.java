@@ -12,12 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.fragment.BaseFragment;
-import ahu.bigdata.huiculture.fragment.cloud.CeleFrag;
-import ahu.bigdata.huiculture.fragment.cloud.DrawFrag;
-import ahu.bigdata.huiculture.fragment.cloud.HisFrag;
-import ahu.bigdata.huiculture.fragment.cloud.LitFrag;
-import ahu.bigdata.huiculture.fragment.cloud.RmFrag;
-import ahu.bigdata.huiculture.fragment.cloud.TechFrag;
+import ahu.bigdata.huiculture.fragment.cloud.CelebrityFragment;
+import ahu.bigdata.huiculture.fragment.cloud.OtherFragment;
+import ahu.bigdata.huiculture.fragment.cloud.PaintingFragment;
+import ahu.bigdata.huiculture.fragment.cloud.HistoryFragment;
+import ahu.bigdata.huiculture.fragment.cloud.LiteratureFragment;
+import ahu.bigdata.huiculture.fragment.cloud.RecommendFragment;
+import ahu.bigdata.huiculture.fragment.cloud.TechnologyFraggment;
+import ahu.bigdata.huiculture.fragment.cloud.XinAnFragment;
 
 /**
  * Created by ych10 on 2017/9/21.
@@ -114,15 +116,19 @@ public class CloudFragment extends BaseFragment {
         mTitle.add("历史");
         mTitle.add("名人");
         mTitle.add("文学");
-        mTitle.add("画派");
         mTitle.add("科技");
+        mTitle.add("画派");
+        mTitle.add("新安");
+        mTitle.add("其他");
 
         mFragment = new ArrayList<>();
-        mFragment.add(new RmFrag());
-        mFragment.add(new HisFrag());
-        mFragment.add(new CeleFrag());
-        mFragment.add(new LitFrag());
-        mFragment.add(new DrawFrag());
-        mFragment.add(new TechFrag());
+        mFragment.add(new RecommendFragment());
+        mFragment.add(new HistoryFragment());
+        mFragment.add(new CelebrityFragment());
+        mFragment.add(new LiteratureFragment());
+        mFragment.add(new TechnologyFraggment());
+        mFragment.add(new PaintingFragment());
+        mFragment.add(new XinAnFragment());
+        mFragment.add(new OtherFragment());
     }
 }

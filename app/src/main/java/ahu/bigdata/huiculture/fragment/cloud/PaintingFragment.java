@@ -10,14 +10,14 @@ import ahu.bigdata.huiculture.fragment.BaseFragment;
 
 /**
  * Created by YCH on 2017/10/6.
- * Function:名人
+ * Function:绘画
  */
-public class CeleFrag extends BaseFragment {
+public class PaintingFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_person, null);
+        View view = inflater.inflate(R.layout.fragment_painting, null);
         return view;
 
     }

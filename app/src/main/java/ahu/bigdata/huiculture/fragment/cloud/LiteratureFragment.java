@@ -10,15 +10,13 @@ import ahu.bigdata.huiculture.fragment.BaseFragment;
 
 /**
  * Created by YCH on 2017/10/6.
- * Function:名人
+ * Function:文学
  */
-public class DrawFrag extends BaseFragment {
-
+public class LiteratureFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_person, null);
+        View view = inflater.inflate(R.layout.fragment_literature, null);
         return view;
-
     }
 }
