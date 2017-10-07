@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
+import ahu.bigdata.huiculture.utils.L;
 
 /**
  * Created by YCH on 2017/9/27.
@@ -39,19 +40,17 @@ public class WebViewActivity extends BaseActivity {
         final String Url = intent.getStringExtra("url");
         //设置标题
         getSupportActionBar().setTitle(intent.getStringExtra("title"));
-        ahu.bigdata.huiculture.utils.L.i("Url:"+Url);
+        L.d("---------------Url get:---------------"+Url);
 
         //进行加载网页的逻辑
         mWebView.getSettings().setJavaScriptEnabled(true);
-//        //支持缩放
-//        mWebView.getSettings().setSupportZoom(true);
-//        mWebView.getSettings().setBuiltInZoomControls(true);
+        //支持缩放
+        mWebView.getSettings().setSupportZoom(true);
+        mWebView.getSettings().setBuiltInZoomControls(true);
         //接口回调
         mWebView.setWebChromeClient(new WebViewClient());
         //加载网页
-        ahu.bigdata.huiculture.utils.L.i("Url receieved:"+Url);
         mWebView.loadUrl(Url);
-
         //本地显示
         mWebView.setWebViewClient(new android.webkit.WebViewClient(){
             /**
