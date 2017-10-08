@@ -54,9 +54,11 @@
         android:id="@+id/item_product_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_below="@id/item_logo_view"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="5dp"
         android:scrollbars="none"
-        android:layout_below="@+id/item_logo_view"
-        android:layout_centerHorizontal="true">
+    >
 
         <LinearLayout
             android:id="@+id/product_photo_layout"
