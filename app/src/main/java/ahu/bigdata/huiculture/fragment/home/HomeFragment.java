@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.youdu.okhttp.CommonOkHttpClient;
 import com.youdu.okhttp.listener.DisposeDataListener;
@@ -101,9 +102,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
      * 请求失败
      */
     private void showErrorView() {
-
-
-
+        Toast.makeText(mContext, "加载失败", Toast.LENGTH_SHORT).show();
     }
 
     @Override

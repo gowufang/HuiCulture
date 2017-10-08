@@ -105,6 +105,7 @@ public class CourseAdapter extends BaseAdapter{
             switch (type) {
                 //多图Item
                 case CARD_MULTI_PIC:
+
                     mViewHolder = new ViewHolder();
                     //root会协助linearlayout的根节点生成布局参数
                     convertView = mInflate.inflate(R.layout.item_product_card_multi_layout, parent, false);
