@@ -25,5 +25,6 @@
         app:menu="@menu/navigation"
         app:itemTextColor="@color/colorGray"
         app:itemBackground="@color/Background"
+
      />
 </LinearLayout>
