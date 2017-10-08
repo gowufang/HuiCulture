@@ -10,6 +10,7 @@ import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -23,96 +24,85 @@ import ahu.bigdata.huiculture.R;
  */
 public class ImageLoaderManager {
 
-    private static final int THREAD_COUNT = 4;//UIL最多可有多少条线程
-    private static final int PROPRITY = 2;//加载图片的优先级。比版本高
-    private static final int DISK_CACHE_SIZE = 50 * 1024;//表明UIL可以存多少张图片
-    private static final int CONNECTION_TIME_OUT = 5 * 1000;//连接的超时时间
-    private static final int READ_TIME_OUT = 30 * 1000;//读取的超时时间
 
-    private static ImageLoader mImageLoader = null;
+    private static final int THREAD_COUNT = 4;
+    private static final int PRIORITY = 2;
+    private static final int MEMORY_CACHE_SIZE = 2 * 1024 * 1024;
+    private static final int DISK_CACHE_SIZE = 50 * 1024 * 1024;
+    private static final int CONNECTION_TIME_OUT = 5 * 1000;
+    private static final int READ_TIME_OUT = 30 * 1000;
+
     private static ImageLoaderManager mInstance = null;
+    private static ImageLoader mLoader = null;
 
-    public static ImageLoaderManager getInstance(Context mContex) {
-        if (mContex == null) {
+
+    public static ImageLoaderManager getInstance(Context context) {
+        if (mInstance == null) {
             synchronized (ImageLoaderManager.class) {
                 if (mInstance == null) {
-                    mInstance = new ImageLoaderManager(mContex);
+                    mInstance = new ImageLoaderManager(context);
                 }
-
             }
         }
         return mInstance;
     }
 
     /**
-     * Created by ych10 on 2017/10/2
-     * Fuction:单例模式的私有构造方法
-     */
-    private ImageLoaderManager(Context contex) {
-
-        ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.
-                Builder(contex).
-                threadPoolSize(THREAD_COUNT).//配置图片下载线程的最大数量
-                threadPriority(Thread.NORM_PRIORITY - PROPRITY).//系统不同，优先级不同，降级
-                denyCacheImageMultipleSizesInMemory().//防止缓存多套尺寸图片
-                memoryCache(new WeakMemoryCache()).//使用弱引用，在内存不足时回收图片
-                diskCacheSize(DISK_CACHE_SIZE).//分配硬盘缓存的大小
-                diskCacheFileNameGenerator(new Md5FileNameGenerator()).//使用MD5命名文件，更安全
-                tasksProcessingOrder(QueueProcessingType.FIFO).//图片下载次序
-                defaultDisplayImageOptions(getDefultOption()).//默认图片下载Option
-                imageDownloader(new BaseImageDownloader(contex, CONNECTION_TIME_OUT, READ_TIME_OUT)).//设置图片下载器
-                writeDebugLogs().//debug环境下会输出日志
-                build();
-        ImageLoader.getInstance().init(configuration);
-        mImageLoader = ImageLoader.getInstance();
-
-
-    }
-
-    /**
-     * 实现我们默认的Option
+     * 私有构造方法完成初始化工作
      *
-     * @return
+     * @param context
      */
-    private DisplayImageOptions getDefultOption() {
+    private ImageLoaderManager(Context context) {
 
-        DisplayImageOptions option = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.drawable.anhui)
-                .showImageOnFail(R.drawable.anhui)
-                .cacheOnDisk(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)//使用的解码类型,降低图片色彩，减少内存占用
-                .decodingOptions(new BitmapFactory.Options())//系统自带图片解码配置
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration
+                .Builder(context)
+                .threadPoolSize(THREAD_COUNT)
+                .threadPriority(Thread.NORM_PRIORITY - PRIORITY)
+                .denyCacheImageMultipleSizesInMemory()
+                //.memoryCache(new UsingFreqLimitedMemoryCache(MEMORY_CACHE_SIZE))
+                .memoryCache(new WeakMemoryCache())
+                .diskCacheSize(DISK_CACHE_SIZE)
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())//将保存的时候的URI名称用MD5 加密
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .defaultDisplayImageOptions(getDefaultOptions())
+                .imageDownloader(new BaseImageDownloader(context, CONNECTION_TIME_OUT, READ_TIME_OUT))
+                .writeDebugLogs()
                 .build();
-        return option;
+
+        ImageLoader.getInstance().init(config);
+        mLoader = ImageLoader.getInstance();
     }
 
-
-    /**
-     * 加载图片API
-     *
-     * @param imageView
-     * @param url
-     * @param options
-     * @param listener
-     */
-    public void DispalyImage(ImageView imageView, String url, DisplayImageOptions options, ImageLoadingListener listener) {
-
-        if (mImageLoader != null) {
-
-            mImageLoader.displayImage(url, imageView, options, listener);
-
+    //load the image
+    public void displayImage(ImageView imageView, String path, ImageLoadingListener listener) {
+        if (mLoader != null) {
+            mLoader.displayImage(path, imageView, listener);
         }
     }
 
-    public void displayImage(ImageView imageview, String url, ImageLoadingListener listener) {
-
-        DispalyImage(imageview, url, null, listener);
-
+    public void displayImage(ImageView imageView, String path) {
+        displayImage(imageView, path, null);
     }
 
-    public void displayImage(ImageView ImageView, String url) {
+    /**
+     * 默认的图片显示Options,可设置图片的缓存策略，编解码方式等，非常重要
+     * @return
+     */
+    private DisplayImageOptions getDefaultOptions() {
 
-        DispalyImage(ImageView,url,null,null);
+        DisplayImageOptions options = new
+                DisplayImageOptions.Builder()
+                .showImageForEmptyUri(R.drawable.xadsdk_img_error)
+                .showImageOnFail(R.drawable.profile)
+                .cacheInMemory(true)//设置下载的图片是否缓存在内存中, 重要，否则图片不会缓存到内存中
+                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中, 重要，否则图片不会缓存到硬盘中
+                .considerExifParams(true)  //是否考虑JPEG图像EXIF参数（旋转，翻转）
+                .imageScaleType(ImageScaleType.IN_SAMPLE_INT)//设置图片以如何的编码方式显示
+                .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型//
+                .decodingOptions(new BitmapFactory.Options())//设置图片的解码配置
+                .resetViewBeforeLoading(true)//设置图片在下载前是否重置，复位
+                .build();
+        return options;
     }
 
 }
