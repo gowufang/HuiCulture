@@ -54,7 +54,7 @@ public class WechatAdapter extends BaseAdapter {
         *Create by YCH on 18:11
         *Function:判断是否缓存,View中的setTag（Object）表示给View添加一个格外的数据，以后可以用getTag()将这个数据取出来。
         */
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder;
         if (view == null) {
             viewHolder = new ViewHolder();
             view = inflater.inflate(R.layout.wechat_item,null);

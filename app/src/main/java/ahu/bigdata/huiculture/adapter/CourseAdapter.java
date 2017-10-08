@@ -1,9 +1,9 @@
 package ahu.bigdata.huiculture.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,16 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.youdu.activity.AdBrowserActivity;
 import com.youdu.adutil.Utils;
-import com.youdu.core.AdContextInterface;
-import com.youdu.core.video.VideoAdContext;
 
 import java.util.ArrayList;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.module.recommand.RecommandBodyValue;
 import ahu.bigdata.huiculture.utils.ImageLoaderManager;
+import ahu.bigdata.huiculture.utils.L;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -93,20 +91,20 @@ public class CourseAdapter extends BaseAdapter{
     }
 
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         //1.获取数据类型
         int type = getItemViewType(position);
+        L.e("TYPE-----------------:"+type);
         //2.获取数据
         final RecommandBodyValue value = (RecommandBodyValue) getItem(position);
         //3.判断缓存是否为空
         if (convertView == null) {
             switch (type) {
-                case VIDOE_TYPE:
-
-                    break;
                 case CARD_TYPE_ONE:
+
                     mViewHolder = new ViewHolder();
                     convertView = mInflate.inflate(R.layout.item_product_card_one_layout, parent, false);
                     //初始化控件
@@ -118,10 +116,7 @@ public class CourseAdapter extends BaseAdapter{
                     mViewHolder.mFromView = (TextView) convertView.findViewById(R.id.item_from_view);
                     mViewHolder.mZanView = (TextView) convertView.findViewById(R.id.item_zan_view);
                     mViewHolder.mProductLayout = (LinearLayout) convertView.findViewById(R.id.product_photo_layout);
-                    break;
-                case CARD_TYPE_TWO:
-                    break;
-                case CARD_TYPE_THREE:
+
                     break;
             }
             convertView.setTag(mViewHolder);
@@ -131,11 +126,8 @@ public class CourseAdapter extends BaseAdapter{
         }
         //绑定数据
         switch (type) {
-            case VIDOE_TYPE:
 
-                break;
             case CARD_TYPE_ONE:
-
                 mViewHolder.mTitleView.setText(value.title);
                 mViewHolder.mInfoView.setText(value.info.concat(mContext.getString(R.string.tian_qian)));
                 mViewHolder.mFooterView.setText(value.text);
@@ -147,11 +139,11 @@ public class CourseAdapter extends BaseAdapter{
                  */
                 mImagerLoader.displayImage(mViewHolder.mLogoView, value.logo);
                 mImagerLoader.displayImage(mViewHolder.mProductView,value.url.get(0));
-
-                break;
-            case CARD_TYPE_TWO:
-
-            case CARD_TYPE_THREE:
+                mViewHolder.mProductLayout.removeAllViews();
+                //动态添加多个imageview
+                for (String url : value.url) {
+                    mViewHolder.mProductLayout.addView(createImageView(url));
+                }
                 break;
         }
         return convertView;
