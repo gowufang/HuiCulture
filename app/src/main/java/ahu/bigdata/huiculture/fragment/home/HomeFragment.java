@@ -86,8 +86,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private void showSuccessView() {
 
         if (mRecommanddata != null && mRecommanddata.data.list.size() > 0) {
-
             mLoadingView.setVisibility(View.GONE);
+            mListView.setVisibility(View.VISIBLE);
             //创建Adapter
             mAdapter = new CourseAdapter(mContext,mRecommanddata.data.list);
             mListView.setAdapter(mAdapter);

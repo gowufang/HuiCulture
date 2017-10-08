@@ -22,7 +22,10 @@ import java.util.ArrayList;
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.module.recommand.RecommandBodyValue;
 import ahu.bigdata.huiculture.utils.ImageLoaderManager;
+import ahu.bigdata.huiculture.utils.L;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static ahu.bigdata.huiculture.utils.L.TAG;
 
 /**
  * Created by ych10 on 2017/10/7.
@@ -103,9 +106,6 @@ public class CourseAdapter extends BaseAdapter{
         //3.判断缓存是否为空
         if (convertView == null) {
             switch (type) {
-                case VIDOE_TYPE:
-
-                    break;
                 case CARD_TYPE_ONE:
                     mViewHolder = new ViewHolder();
                     convertView = mInflate.inflate(R.layout.item_product_card_one_layout, parent, false);
@@ -119,10 +119,6 @@ public class CourseAdapter extends BaseAdapter{
                     mViewHolder.mZanView = (TextView) convertView.findViewById(R.id.item_zan_view);
                     mViewHolder.mProductLayout = (LinearLayout) convertView.findViewById(R.id.product_photo_layout);
                     break;
-                case CARD_TYPE_TWO:
-                    break;
-                case CARD_TYPE_THREE:
-                    break;
             }
             convertView.setTag(mViewHolder);
         }//有tag时
@@ -131,11 +127,7 @@ public class CourseAdapter extends BaseAdapter{
         }
         //绑定数据
         switch (type) {
-            case VIDOE_TYPE:
-
-                break;
             case CARD_TYPE_ONE:
-
                 mViewHolder.mTitleView.setText(value.title);
                 mViewHolder.mInfoView.setText(value.info.concat(mContext.getString(R.string.tian_qian)));
                 mViewHolder.mFooterView.setText(value.text);
@@ -146,12 +138,11 @@ public class CourseAdapter extends BaseAdapter{
                  * 加载Image到ImageView
                  */
                 mImagerLoader.displayImage(mViewHolder.mLogoView, value.logo);
-                mImagerLoader.displayImage(mViewHolder.mProductView,value.url.get(0));
-
-                break;
-            case CARD_TYPE_TWO:
-
-            case CARD_TYPE_THREE:
+                mViewHolder.mProductLayout.removeAllViews();
+                //动态添加多个imageview
+                for (String url : value.url) {
+                    mViewHolder.mProductLayout.addView(createImageView(url));
+                }
                 break;
         }
         return convertView;
