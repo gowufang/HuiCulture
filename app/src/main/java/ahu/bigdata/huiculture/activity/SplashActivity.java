@@ -70,7 +70,7 @@ public class SplashActivity extends ahu.bigdata.huiculture.activity.base.BaseAct
         handler.sendEmptyMessageDelayed(Constant.HANDLER_SPLASH, 2000);
 //        tv_splash.setImageResource(R.drawable.ic_home_selected);
         //设置字体
-//        UtilTools.setFonts(this,tv_splash);
+//        Util.setFonts(this,tv_splash);
 
     }
 

@@ -60,7 +60,7 @@
         android:layout_height="match_parent"
         android:alwaysDrawnWithCache="false"
         android:divider="@color/white"
-        android:dividerHeight="10dp"
+        android:dividerHeight="20dp"
         android:visibility="gone"
         />
 </LinearLayout>
