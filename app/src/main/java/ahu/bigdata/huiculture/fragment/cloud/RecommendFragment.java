@@ -45,6 +45,7 @@ public class RecommendFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_wechat, null);
+
         findView(view);
         return view;
     }
@@ -58,7 +59,7 @@ public class RecommendFragment extends BaseFragment {
             @Override
             public void onSuccess(String t) {
                 super.onSuccess(t);
-//                L.i("Json:"+t);
+                L.i("Json:"+t);
                 parseJson(t);
             }
         });
