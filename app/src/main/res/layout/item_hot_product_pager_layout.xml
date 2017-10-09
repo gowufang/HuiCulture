@@ -101,7 +101,7 @@
         android:layout_alignLeft="@id/title_view"
         android:layout_alignRight="@id/image_layout"
         android:layout_below="@id/image_layout"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:background="@color/color_e3e3e3"
         />
 
@@ -117,8 +117,9 @@
         android:gravity="center"
         android:lines="1"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:paddingTop="5dp"
         android:text="已售400份"
+        android:textColor="@color/colorAccent"
         />
 </RelativeLayout>
 

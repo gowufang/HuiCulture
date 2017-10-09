@@ -5,8 +5,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorGray">#636161</color>
-    <color name="Background">#c7c7ca</color>
-    <color name="white">#e0e0e6</color>
+    <color name="Background">#ecebeb</color>
+    <color name="white">#FFFFFF</color>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <color name="color_333333">#333333</color>
