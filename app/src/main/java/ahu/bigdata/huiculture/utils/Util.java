@@ -1,5 +1,9 @@
 package ahu.bigdata.huiculture.utils;
 
+import android.content.Context;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+
 import java.util.ArrayList;
 
 import ahu.bigdata.huiculture.module.recommand.RecommandBodyValue;
@@ -43,4 +47,12 @@ public class Util {
         }
         return tempUrls;
     }
+
+    public static void hideSoftInputMethod(Context context, View v) {
+        /* 隐藏软键盘 */
+        InputMethodManager inputMethodManager = (InputMethodManager) context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
 }

@@ -25,6 +25,7 @@ import ahu.bigdata.huiculture.fragment.BaseFragment;
 import ahu.bigdata.huiculture.module.recommand.BaseRecommandModel;
 import ahu.bigdata.huiculture.network.http.RequestCenter;
 import ahu.bigdata.huiculture.utils.L;
+import ahu.bigdata.huiculture.view.home.HomeHeaderLayout;
 
 /**
  * Created by ych10 on 2017/9/21.
@@ -88,6 +89,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         if (mRecommanddata != null && mRecommanddata.data.list.size() > 0) {
             mLoadingView.setVisibility(View.GONE);
             mListView.setVisibility(View.VISIBLE);
+            //添加自定义头布局，ListView的add可重复添加，set会覆盖
+            mListView.addHeaderView(new HomeHeaderLayout(mContext,mRecommanddata.data.head));
             //创建Adapter
             mAdapter = new CourseAdapter(mContext,mRecommanddata.data.list);
             mListView.setAdapter(mAdapter);
