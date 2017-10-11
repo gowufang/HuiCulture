@@ -9,7 +9,9 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
+import ahu.bigdata.huiculture.activity.CourseDetailActivity;
 import ahu.bigdata.huiculture.utils.ImageLoaderManager;
+import uk.co.senab.photoview.PhotoView;
 
 /**
  * Created by YCH on 2017/10/10.
@@ -38,26 +40,25 @@ public class PhotoPagerAdapter extends PagerAdapter {
 
     @Override
     public View instantiateItem(ViewGroup container, int position) {
-//        ImageView photoView;
-//        if (mIsMatch) {
-//            photoView = new ImageView(mContext);
-//            photoView.setScaleType(ImageView.ScaleType.FIT_XY);
-//            photoView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(mContext,
-//                            CourseDetailActivity.class);
-//                    mContext.startActivity(intent);
-//                }
-//            });
-//        } else {
-//            photoView = new PhotoView(mContext);
-//        }
-//        mLoader.displayImage(photoView, mData.get(position));
-//        container.addView(photoView, ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.MATCH_PARENT);
-//        return photoView;
-        return container.getRootView();
+        ImageView photoView;
+        if (mIsMatch) {
+            photoView = new ImageView(mContext);
+            photoView.setScaleType(ImageView.ScaleType.FIT_XY);
+            photoView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext,
+                            CourseDetailActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
+    } else {
+            photoView = new PhotoView(mContext);
+    }
+        mLoader.displayImage(photoView, mData.get(position));
+        container.addView(photoView, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        return photoView;
     }
 
     @Override
