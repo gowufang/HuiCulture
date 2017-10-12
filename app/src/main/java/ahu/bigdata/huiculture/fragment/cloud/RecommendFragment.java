@@ -3,10 +3,12 @@ package ahu.bigdata.huiculture.fragment.cloud;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
@@ -36,6 +38,7 @@ public class RecommendFragment extends BaseFragment {
      *UI
      */
     private ListView mListView;
+    private ScrollView mScrollView;
     private List<WeChatData> mlist=new ArrayList<>();
     //标题
     private List<String> mListTitle = new ArrayList<>();
