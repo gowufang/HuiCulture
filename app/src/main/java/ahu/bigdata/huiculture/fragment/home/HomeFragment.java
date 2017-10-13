@@ -183,6 +183,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+            //扫码处理逻辑
             case REQUEST_QRCODE:
                 if (resultCode == Activity.RESULT_OK) {
                     String code = data.getStringExtra("SCAN_RESULT");

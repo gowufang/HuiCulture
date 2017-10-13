@@ -522,6 +522,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             uri = data.getData();
+            //启动一个线程完成扫码
             new Thread(new Runnable() {
                 @Override
                 public void run() {
