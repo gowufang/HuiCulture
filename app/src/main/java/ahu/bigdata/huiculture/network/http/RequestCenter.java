@@ -1,6 +1,7 @@
 package ahu.bigdata.huiculture.network.http;
 
 import com.youdu.okhttp.CommonOkHttpClient;
+import com.youdu.okhttp.HttpConstant;
 import com.youdu.okhttp.listener.DisposeDataHandle;
 import com.youdu.okhttp.listener.DisposeDataListener;
 import com.youdu.okhttp.listener.DisposeDownloadListener;
@@ -42,6 +43,10 @@ public class RequestCenter {
     public static void downloadFile(String url, String path, DisposeDownloadListener listener) {
         CommonOkHttpClient.downloadFile(CommonRequest.createGetRequest(url, null),
                 new DisposeDataHandle(listener, path));
+    }
+   public static void  requestHistoryData(DisposeDataListener listener) {
+       RequestCenter.postRequest(HttpConstants.HISTORY_PAGE,null,listener,BaseRecommandModel.class);
+
     }
 
 }

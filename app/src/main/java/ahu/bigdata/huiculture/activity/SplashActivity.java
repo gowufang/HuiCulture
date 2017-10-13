@@ -33,8 +33,9 @@ public class SplashActivity extends ahu.bigdata.huiculture.activity.base.BaseAct
                     if (isFirst()) {
                         startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                     } else {
-                        startActivity(new Intent(SplashActivity.this,GuideActivity.class));
-//                        startActivity(new Intent(SplashActivity.this,HomeActivity.class));
+                        //测试引导页
+//                        startActivity(new Intent(SplashActivity.this,GuideActivity.class));
+                        startActivity(new Intent(SplashActivity.this,HomeActivity.class));
                     }
                     finish();
                     break;

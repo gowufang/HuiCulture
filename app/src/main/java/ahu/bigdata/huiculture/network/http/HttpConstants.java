@@ -45,4 +45,6 @@ public class HttpConstants {
      */
     public static String COURSE_DETAIL = ROOT_URL + "/product/course_detail.php";
 
+
+    public static String HISTORY_PAGE = ROOT_URL + "/history/history.php";
 }

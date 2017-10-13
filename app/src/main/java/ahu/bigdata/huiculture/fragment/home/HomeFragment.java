@@ -1,5 +1,6 @@
 package ahu.bigdata.huiculture.fragment.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.AnimationDrawable;
@@ -13,19 +14,24 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.youdu.activity.AdBrowserActivity;
 import com.youdu.okhttp.CommonOkHttpClient;
 import com.youdu.okhttp.listener.DisposeDataListener;
 
 import ahu.bigdata.huiculture.R;
+import ahu.bigdata.huiculture.activity.PhotoViewActivity;
 import ahu.bigdata.huiculture.activity.SearchActivity;
 import ahu.bigdata.huiculture.adapter.CourseAdapter;
 import ahu.bigdata.huiculture.constant.Constant;
 import ahu.bigdata.huiculture.fragment.BaseFragment;
 import ahu.bigdata.huiculture.module.recommand.BaseRecommandModel;
+import ahu.bigdata.huiculture.module.recommand.RecommandBodyValue;
 import ahu.bigdata.huiculture.network.http.RequestCenter;
 import ahu.bigdata.huiculture.utils.L;
 import ahu.bigdata.huiculture.view.home.HomeHeaderLayout;
+import ahu.bigdata.huiculture.zxing.app.CaptureActivity;
 
 /**
  * Created by ych10 on 2017/9/21.
@@ -33,6 +39,7 @@ import ahu.bigdata.huiculture.view.home.HomeHeaderLayout;
  */
 public class HomeFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
+    private static final int REQUEST_QRCODE =0x01 ;
     /**
      * UI
      */
@@ -138,6 +145,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -157,9 +165,36 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        RecommandBodyValue value = (RecommandBodyValue) mAdapter.getItem(position - mListView.getHeaderViewsCount());
+        if (value.type != 0) {
+            Intent intent = new Intent(mContext, PhotoViewActivity.class);
+            intent.putStringArrayListExtra(PhotoViewActivity.PHOTO_LIST, value.url);
+            startActivity(intent);
+        }
+    }
 
+    @Override
+    public void doOpenCamera() {
+        startActivityForResult(new Intent(mContext, CaptureActivity.class),REQUEST_QRCODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_QRCODE:
+                if (resultCode == Activity.RESULT_OK) {
+                    String code = data.getStringExtra("SCAN_RESULT");
+                    if (code.contains("http") || code.contains("https")) {
+                        Intent intent = new Intent(mContext, AdBrowserActivity.class);
+                        intent.putExtra(AdBrowserActivity.KEY_URL, code);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(mContext, code, Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+        }
     }
 }

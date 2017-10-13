@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     >
     <TextView
+        android:id="@+id/mTextView"
+        android:textColor="@color/black"
         android:gravity="center"
         android:text="徽州历史"
         android:textSize="30dp"

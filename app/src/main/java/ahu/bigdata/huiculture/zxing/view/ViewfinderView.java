@@ -90,11 +90,14 @@ public final class ViewfinderView extends View {
         resultColor = resources.getColor(R.color.result_view);
         resultPointColor = resources.getColor(R.color.possible_result_points);
         possibleResultPoints = new HashSet<ResultPoint>(5);
-
+        //屏幕密度
         density = context.getResources().getDisplayMetrics().density;
         ScreenRate = (int) (15 * density);
     }
 
+    /**
+     * 在onDraw方法中完成二维码的绘制
+     */
     @Override
     public void onDraw(Canvas canvas) {
         Rect frame = CameraManager.get().getFramingRect();
@@ -123,7 +126,7 @@ public final class ViewfinderView extends View {
             paint.setAlpha(OPAQUE);
             canvas.drawBitmap(resultBitmap, null, frame, paint);
         } else {
-
+            /*矩形*/
             paint.setColor(Color.BLUE);
             canvas.drawRect(frame.left, frame.top, frame.left + ScreenRate,
                     frame.top + CORNER_WIDTH, paint);
@@ -141,7 +144,7 @@ public final class ViewfinderView extends View {
                     - CORNER_WIDTH, frame.right, frame.bottom, paint);
             canvas.drawRect(frame.right - CORNER_WIDTH, frame.bottom
                     - ScreenRate, frame.right, frame.bottom, paint);
-
+            //
             slideTop += SPEEN_DISTANCE;
             if (slideTop >= frame.bottom) {
                 slideTop = frame.top;

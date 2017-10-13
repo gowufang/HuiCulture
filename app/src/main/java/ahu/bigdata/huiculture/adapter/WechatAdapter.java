@@ -1,6 +1,7 @@
 package ahu.bigdata.huiculture.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
 import java.util.List;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.module.wechat.WeChatData;
-import ahu.bigdata.huiculture.utils.PicassoUtils;
+import ahu.bigdata.huiculture.utils.ImageLoaderManager;
+import ahu.bigdata.huiculture.utils.L;
 
 /**
  * Created by YCH on 2017/9/25.
@@ -69,9 +74,28 @@ public class WechatAdapter extends BaseAdapter {
         viewHolder.tv_source.setText(data.getSource());
         viewHolder.tv_title.setText(data.getTitle());
         /**
-         *加载Picasso
+         *加载图片
          */
-        PicassoUtils.loadImagViewSize(mContex,data.getImgUrl(),200,200,viewHolder.iv_img);
+        ImageLoaderManager.getInstance(mContex).displayImage(viewHolder.iv_img, data.getImgUrl(), new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                L.d("图片加载失败");
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+
+            }
+        });
         return view;
     }
     class ViewHolder{

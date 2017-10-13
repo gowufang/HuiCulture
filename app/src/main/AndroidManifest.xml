@@ -76,6 +76,10 @@
             android:name=".activity.GuideActivity"/>
         <!--网页详情页-->
         <activity android:name=".activity.WebViewActivity"></activity>
+        <!--课程详情页-->
+        <activity android:name=".activity.CourseDetailActivity"></activity>
+        <!--二维码界面-->
+        <activity android:name=".zxing.app.CaptureActivity"></activity>
     </application>
 
 </manifest>

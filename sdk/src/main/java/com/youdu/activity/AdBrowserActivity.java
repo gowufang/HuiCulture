@@ -28,7 +28,7 @@ import com.youdu.widget.adbrowser.BrowserWebView;
  * @function: 广告WebView页面
  * @date: 16/7/5
  */
-public final class AdBrowserActivity extends Activity {
+public final class  AdBrowserActivity extends Activity {
 
     private static final String LOG_TAG = AdBrowserActivity.class.getSimpleName();
 

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
+import ahu.bigdata.huiculture.zxing.app.CaptureActivity;
+
 /**
  * Created by ych10 on 2017/9/21.
  * Function:为所有Fragment提供公共行为和事件：如统计代码等
@@ -60,6 +62,7 @@ public class BaseFragment extends Fragment {
 
 
     public void doOpenCamera() {
+
 
     }
 
