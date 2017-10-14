@@ -27,21 +27,9 @@ public class BaseActivity extends AppCompatActivity {
 //        /**
 //         *显示箭头返回
 //         */
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+//    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+}
 
-    //菜单栏
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.home:
-                finish();
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onResume() {

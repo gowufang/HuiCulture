@@ -1,25 +1,26 @@
 package ahu.bigdata.huiculture.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import ahu.bigdata.huiculture.R;
+import ahu.bigdata.huiculture.activity.WebViewActivity;
+import ahu.bigdata.huiculture.adapter.GridViewAdapter;
 import ahu.bigdata.huiculture.fragment.BaseFragment;
-import ahu.bigdata.huiculture.fragment.cloud.CelebrityFragment;
-import ahu.bigdata.huiculture.fragment.cloud.OtherFragment;
-import ahu.bigdata.huiculture.fragment.cloud.PaintingFragment;
-import ahu.bigdata.huiculture.fragment.cloud.HistoryFragment;
-import ahu.bigdata.huiculture.fragment.cloud.LiteratureFragment;
-import ahu.bigdata.huiculture.fragment.cloud.RecommendFragment;
-import ahu.bigdata.huiculture.fragment.cloud.TechnologyFraggment;
-import ahu.bigdata.huiculture.fragment.cloud.XinAnFragment;
+import ahu.bigdata.huiculture.module.cloud.GridItem;
+import ahu.bigdata.huiculture.utils.L;
 
 /**
  * Created by ych10 on 2017/9/21.
@@ -37,98 +38,99 @@ public class CloudFragment extends BaseFragment {
     /**
      * UI
      */
+
     private View mContentView;
-    //TabLayout
-    private TabLayout mTabLayout;
-    //ViewPager
-    private ViewPager mViewPager;
-    //Tittle
-    private List<String> mTitle;
-    //Fragment
-    private List<Fragment> mFragment;
+    private String[] localCartoonText = {"徽商", "徽州宗族", "新安理学", "新安医学", "新安画派",
+            "徽州文书", "徽州朴学", "徽派版画", "徽派建筑", "徽州三雕", "文房四宝", "历史人物"};
+
+    private String[] imgURL = {"http://hz.cnwangjie.com/static/%E5%BE%BD%E5%95%86.jpg",
+            "http://hz.cnwangjie.com/static/%E5%BE%BD%E5%B7%9E%E5%AE%97%E6%97%8F.jpg",
+            "http://hz.cnwangjie.com/static/%E6%96%B0%E5%AE%89%E7%90%86%E5%AD%A6.jpg",
+            "http://hz.cnwangjie.com/static/%E6%96%B0%E5%AE%89%E5%8C%BB%E5%AD%A6.jpg",
+            "http://hz.cnwangjie.com/static/%E6%96%B0%E5%AE%89%E7%94%BB%E6%B4%BE.jpg",
+            "http://hz.cnwangjie.com/static/%E5%BE%BD%E5%B7%9E%E6%96%87%E4%B9%A6.jpg",
+            "http://hz.cnwangjie.com/static/%E5%BE%BD%E6%B4%BE%E6%9C%B4%E5%AD%A6.jpg",
+            "http://hz.cnwangjie.com/static/%E5%BE%BD%E6%B4%BE%E7%89%88%E7%94%BB.jpg",
+            "http://hz.cnwangjie.com/static/%E5%BE%BD%E5%B7%9E%E4%B8%89%E9%9B%95.jpg",
+            "http://hz.cnwangjie.com/static/%E6%96%87%E6%88%BF%E5%9B%9B%E5%AE%9D.jpg",
+            "http://hz.cnwangjie.com/static/%E5%BE%BD%E5%B7%9E%E5%8E%86%E5%8F%B2%E4%BA%BA%E7%89%A9.jpg"
+
+    };
+    private GridView mGridView = null;
+    private GridViewAdapter mGridViewAdapter = null;
+    private ArrayList<GridItem> mGridData = null;
+    //标题
+    private List<String> mListTitle = new ArrayList<>();
+    //地址
+    private List<String> mListUrl = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mContext = getActivity();
-        mContentView= inflater.inflate(R.layout.fragment_cloud,null);
+
+        mContentView = inflater.inflate(R.layout.fragment_cloud, null);
         initView();
         return mContentView;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+            super.onCreate(savedInstanceState);
         initData();
-    }
-
-    private void initView() {
-
-        mViewPager = (ViewPager) mContentView.findViewById(R.id.vp);
-        mTabLayout = (TabLayout) mContentView.findViewById(R.id.tb);
-        //预加载
-        mViewPager.setOffscreenPageLimit(mFragment.size());
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-        //设置适配器
-        mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
-            //选中的Item
-            @Override
-            public Fragment getItem(int position) {
-                return mFragment.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return mFragment.size();
-            }
-            //设置标题
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return mTitle.get(position);
-            }
-
-        });
-        mTabLayout.setupWithViewPager(mViewPager);
-
     }
 
     private void initData() {
 
-        mTitle = new ArrayList<>();
-        mTitle.add("推荐");
-        mTitle.add("历史");
-        mTitle.add("名人");
-        mTitle.add("文学");
-        mTitle.add("科技");
-        mTitle.add("画派");
-        mTitle.add("新安");
-        mTitle.add("其他");
+        mGridData = new ArrayList<GridItem>();
+        for (int i = 0; i < imgURL.length; i++) {
+            GridItem item = new GridItem();
+            item.setTitle(localCartoonText[i]);
+            mListTitle.add(localCartoonText[i]);
+            item.setImage(imgURL[i]);
+            mGridData.add(item);
+        }
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽州宗族");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
 
-        mFragment = new ArrayList<>();
-        mFragment.add(new RecommendFragment());
-        mFragment.add(new HistoryFragment());
-        mFragment.add(new CelebrityFragment());
-        mFragment.add(new LiteratureFragment());
-        mFragment.add(new TechnologyFraggment());
-        mFragment.add(new PaintingFragment());
-        mFragment.add(new XinAnFragment());
-        mFragment.add(new OtherFragment());
     }
+
+    private void initView() {
+
+        mGridView = (GridView) mContentView.findViewById(R.id.mGridView);
+        mGridViewAdapter = new GridViewAdapter(mContext, R.layout.gridview_item, mGridData);
+
+        mGridView.setAdapter(mGridViewAdapter);
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                switch (position) {
+
+                    case 0:
+                        Toast.makeText(mContext, "0000", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        break;
+                }
+
+            }
+        });
+    }
+
+
 }

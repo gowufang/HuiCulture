@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tb"
-        android:background="@color/Background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/colorGray"
-        app:tabSelectedTextColor="@color/black"
-        app:tabTextColor="@color/colorPrimary"
-        app:tabMode="scrollable">
-    </android.support.design.widget.TabLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp"
+    <GridView
+        android:id="@+id/mGridView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        />
+        android:background="@color/white"
+        android:drawSelectorOnTop="false"
+        android:fadeScrollbars="true"
+        android:horizontalSpacing="5dp"
+        android:numColumns="auto_fit"
+        android:transcriptMode="alwaysScroll"
+        android:verticalSpacing="10dp">
+    </GridView>
 
 </LinearLayout>
