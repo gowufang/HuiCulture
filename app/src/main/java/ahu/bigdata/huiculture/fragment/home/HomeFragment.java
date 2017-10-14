@@ -2,11 +2,8 @@ package ahu.bigdata.huiculture.fragment.home;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Animatable;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.youdu.activity.AdBrowserActivity;
-import com.youdu.okhttp.CommonOkHttpClient;
 import com.youdu.okhttp.listener.DisposeDataListener;
 
 import ahu.bigdata.huiculture.R;
@@ -112,14 +108,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
      */
     private void showErrorView() {
 
-
+        Toast.makeText(mContext, "啊哦，加载失败了~", Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         mContext = getActivity();
-        mContentView= inflater.inflate(R.layout.fragment_home,null);
+        mContentView= inflater.inflate(R.layout.fragment_home_layout,null);
         initView();
         return mContentView;
     }

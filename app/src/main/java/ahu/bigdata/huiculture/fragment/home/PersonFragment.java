@@ -16,16 +16,14 @@ import ahu.bigdata.huiculture.fragment.BaseFragment;
  * Created by ych10 on 2017/9/21.
  * Function:
  */
-public class PersonFragment extends BaseFragment implements View.OnClickListener {
+public class PersonFragment extends BaseFragment{
 
     private Button button;
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_person,null);
-        button = (Button) view.findViewById(R.id.test);
-        button.setOnClickListener(this);
+        View view = inflater.inflate(R.layout.fragment_person_layout,null);
         return view;
     }
 
@@ -34,12 +32,5 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.test:
-//                RxVolley.post();
-                break;
-        }
-    }
+
 }
