@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.module.cloud.GridItem;
 import ahu.bigdata.huiculture.utils.ImageLoaderManager;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by YCH on 2017/10/14.
@@ -49,7 +50,7 @@ public class GridViewAdapter extends ArrayAdapter <GridItem>{
             convertView = inflater.inflate(layoutResourceId, parent, false);
             holder = new ViewHolder();
             holder.textView = (TextView) convertView.findViewById(R.id.txt_item);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.img_item);
+            holder.circleimageView = (CircleImageView) convertView.findViewById(R.id.img_item);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -57,13 +58,13 @@ public class GridViewAdapter extends ArrayAdapter <GridItem>{
         GridItem item = mGridData.get(position);
         holder.textView.setText(item.getTitle());
 //        Picasso.with(mContext).load(item.getImage()).into(holder.imageView);
-        ImageLoaderManager.getInstance(mContext).displayImage(holder.imageView,item.getImage());
+        ImageLoaderManager.getInstance(mContext).displayImage(holder.circleimageView,item.getImage());
         return convertView;
     }
 
     private class ViewHolder {
         TextView textView;
-        ImageView imageView;
+        CircleImageView circleimageView;
     }
 
 }

@@ -51,10 +51,10 @@ public class CloudFragment extends BaseFragment {
             "http://hz.cnwangjie.com/static/%E5%BE%BD%E5%B7%9E%E6%96%87%E4%B9%A6.jpg",
             "http://hz.cnwangjie.com/static/%E5%BE%BD%E6%B4%BE%E6%9C%B4%E5%AD%A6.jpg",
             "http://hz.cnwangjie.com/static/%E5%BE%BD%E6%B4%BE%E7%89%88%E7%94%BB.jpg",
+            "http://hz.cnwangjie.com/static/%E5%BE%BD%E6%B4%BE%E5%BB%BA%E7%AD%91.jpg",
             "http://hz.cnwangjie.com/static/%E5%BE%BD%E5%B7%9E%E4%B8%89%E9%9B%95.jpg",
             "http://hz.cnwangjie.com/static/%E6%96%87%E6%88%BF%E5%9B%9B%E5%AE%9D.jpg",
             "http://hz.cnwangjie.com/static/%E5%BE%BD%E5%B7%9E%E5%8E%86%E5%8F%B2%E4%BA%BA%E7%89%A9.jpg"
-
     };
     private GridView mGridView = null;
     private GridViewAdapter mGridViewAdapter = null;
@@ -90,18 +90,21 @@ public class CloudFragment extends BaseFragment {
             item.setImage(imgURL[i]);
             mGridData.add(item);
         }
+        /**
+         * 静态写死
+         */
         mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
         mListUrl.add("http://hz.cnwangjie.com/#/class/徽州宗族");
-        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
-        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
-        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
-        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
-        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
-        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
-        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
-        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
-        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
-        mListUrl.add("http://hz.cnwangjie.com/#/class/徽商");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/新安理学");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/新安医学");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/新安画派");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/新安文书");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/新安朴学");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/新安版画");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽派建筑");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽州三雕");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/文房四宝");
+        mListUrl.add("http://hz.cnwangjie.com/#/class/徽州历史人物");
 
     }
 
@@ -114,18 +117,94 @@ public class CloudFragment extends BaseFragment {
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent;
                 switch (position) {
 
                     case 0:
-                        Toast.makeText(mContext, "0000", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent = new Intent(getActivity(), WebViewActivity.class);
                         intent.putExtra("url", mListUrl.get(position));
                         intent.putExtra("title", mListTitle.get(position));
                         startActivity(intent);
                         break;
                     case 2:
+                         intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
                         break;
+                    case 3:
+                       intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 4:
+                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 5:
+                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 6:
+                         intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 7:
+                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 8:
+                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 9:
+                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 10:
+                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 11:
+                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 12:
+                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 13:
+                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+                    case 14:
+                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra("url", mListUrl.get(position));
+                        intent.putExtra("title", mListTitle.get(position));
+                        startActivity(intent);
+                        break;
+
                 }
 
             }
