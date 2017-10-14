@@ -3,19 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <GridView
         android:id="@+id/mGridView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:drawSelectorOnTop="false"
         android:fadeScrollbars="true"
         android:horizontalSpacing="5dp"
         android:numColumns="auto_fit"
         android:transcriptMode="alwaysScroll"
-        android:verticalSpacing="10dp">
+        android:verticalSpacing="10dp"
+        >
     </GridView>
-
 </LinearLayout>

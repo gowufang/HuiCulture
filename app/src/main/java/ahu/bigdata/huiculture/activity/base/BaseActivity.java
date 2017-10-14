@@ -19,16 +19,12 @@ public class BaseActivity extends AppCompatActivity {
     public String TAG;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TAG = getComponentName().getClassName();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        /**
-//         *显示箭头返回
-//         */
-//    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-}
+    }
 
 
     @Override
@@ -55,7 +51,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
     }
-
 
 
 }

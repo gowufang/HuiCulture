@@ -3,6 +3,7 @@ package ahu.bigdata.huiculture.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ public class PhotoViewActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_view_layout);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initData();
         initView();
     }
@@ -78,10 +80,22 @@ public class PhotoViewActivity extends BaseActivity {
             }
         });
 
-      Util.hideSoftInputMethod(this, mIndictorView);
+        Util.hideSoftInputMethod(this, mIndictorView);
     }
 
-//    @Override
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+
+            finish();
+            return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    //    @Override
 //    public void onClick(View v) {
 //        switch (v.getId()) {
 //            case R.id.share_view:
