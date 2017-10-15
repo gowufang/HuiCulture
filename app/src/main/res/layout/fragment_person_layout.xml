@@ -50,7 +50,7 @@
         />
 
     </RelativeLayout>
-
+    <!--登录以后-->
     <RelativeLayout
         android:id="@+id/logined_layout"
         android:layout_width="match_parent"

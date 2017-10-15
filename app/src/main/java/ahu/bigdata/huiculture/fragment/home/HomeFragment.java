@@ -79,6 +79,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             public void onFailure(Object reasonObj) {
                 //提示用户网络有问题
                 L.e(L.TAG+"------OnFailure:-------:"+reasonObj.toString());
+                Toast.makeText(mContext, "请检查网络设置哦", Toast.LENGTH_SHORT).show();
             }
         });
 

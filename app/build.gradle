@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.0'
+   /*禁止gradle检查png的合法性*/
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
     defaultConfig {
         applicationId "ahu.bigdata.huiculture"
         minSdkVersion 16

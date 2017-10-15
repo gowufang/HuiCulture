@@ -30,14 +30,14 @@
     <string name="account">帐号:</string>
     <string name="password">密码:</string>
     <string name="login">登 陆</string>
-    <string name="unlogin">您还未登陆哦.</string>
+    <string name="unlogin">您还未登陆哦~</string>
     <string name="login_now">马上登陆</string>
     <string name="video_play_setting">视频播放设置</string>
     <string name="auto_player_always">3G/4G和Wifi</string>
     <string name="auto_player_only_wifi">仅Wifi</string>
     <string name="auto_player_never">关闭</string>
     <string name="video_setting">视频播放环境条件</string>
-    <string name="share_imooc">分享imooc给朋友</string>
+    <string name="share_imooc">分享给朋友</string>
     <string name="my_qrcode">我的二维码</string>
     <string name="please_wait">加载中...</string>
     <string name="personal_info">的个人主页</string>
