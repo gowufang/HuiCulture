@@ -73,7 +73,17 @@ public class HomeActivity extends BaseActivity {
          * 初始化页面中所得控件
          */
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            navigation.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    if (scrollY<0) {
 
+                        navigation.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             /**

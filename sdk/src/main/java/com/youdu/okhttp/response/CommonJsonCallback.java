@@ -136,6 +136,7 @@ public class CommonJsonCallback implements Callback {
                         }
                     }
                 }
+
             } else {
                 //将服务器返回给我们的异常回调到应用中处理
                 mListener.onFailure(new OkHttpException(OTHER_ERROR, result));

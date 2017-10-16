@@ -98,7 +98,6 @@ public class CourseAdapter extends BaseAdapter{
         final RecommandBodyValue value = (RecommandBodyValue) getItem(position);
         //3.判断缓存是否为空
         if (convertView == null) {
-
             /**
              *初始化
              */
