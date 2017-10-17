@@ -9,6 +9,7 @@ import com.youdu.okhttp.request.CommonRequest;
 import com.youdu.okhttp.request.RequestParams;
 
 import ahu.bigdata.huiculture.module.recommand.BaseRecommandModel;
+import ahu.bigdata.huiculture.module.recommand.VideoModule;
 import ahu.bigdata.huiculture.module.update.UpdateModel;
 
 /**
@@ -17,7 +18,19 @@ import ahu.bigdata.huiculture.module.update.UpdateModel;
  */
 public class RequestCenter {
 
-    //根据参数发送所有post请求
+    /**
+     * 测试：用okHttp请求Video信息 失败 java.lang.IllegalArgumentException: unexpected url: /api/resource/list
+     */
+    public static void requestVideoData(DisposeDataListener listener) {
+        RequestCenter.postRequest(HttpConstants.VIDEO_LIST,null,listener, VideoModule.class);
+    }
+
+
+
+    /****************************************************************************************************/
+    /**
+     *根据参数发送所有post请求
+     */
     public static void postRequest(String url, RequestParams params, DisposeDataListener listener, Class<?> clazz) {
         CommonOkHttpClient.get(CommonRequest.
                 createGetRequest(url, params), new DisposeDataHandle(listener, clazz));

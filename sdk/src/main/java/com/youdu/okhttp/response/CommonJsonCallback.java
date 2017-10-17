@@ -114,6 +114,8 @@ public class CommonJsonCallback implements Callback {
             mListener.onFailure(new OkHttpException(NETWORK_ERROR, EMPTY_MSG));
             return;
         }
+//
+//        /****************************我自己的********************************/
 //        //尝试解析
 //        try {
 //            JSONArray jsonArray = new JSONArray(responseObj.toString());
@@ -121,16 +123,31 @@ public class CommonJsonCallback implements Callback {
 //                //尝试解析
 //                try {
 //                    JSONObject result = jsonArray.getJSONObject(i);
-//
 //                    if (mClass == null) {
 //                        mListener.onSuccess(responseObj);
 //                    } else {
-//                        //实例化
-//                        Object obj = ResponseEntityToModule.parseJsonObjectToModule(result, mClass);
-//                        if (obj != null) {
-//                            mListener.onSuccess(obj);
+//
+//                        if (result.has("isdir")) {
+//                            if (result.getBoolean("isdir") == false) {
+//                                //实例化
+//                                Object obj = ResponseEntityToModule.parseJsonObjectToModule(result, mClass);
+//                                if (obj != null) {
+//                                    mListener.onSuccess(obj);
+//                                } else {
+//                                    mListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
+//                                }
+//                            } else {
+//                                //如果是目录不实例化
+//                            }
+//
 //                        } else {
-//                            mListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
+//                            //实例化
+//                            Object obj = ResponseEntityToModule.parseJsonObjectToModule(result, mClass);
+//                            if (obj != null) {
+//                                mListener.onSuccess(obj);
+//                            } else {
+//                                mListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
+//                            }
 //                        }
 //                    }
 //                } catch (JSONException e1) {
@@ -140,6 +157,8 @@ public class CommonJsonCallback implements Callback {
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
+
+        /****************************以下为老师的******************************/
         try {
             /**
              * 协议确定后看这里如何修改
@@ -174,5 +193,10 @@ public class CommonJsonCallback implements Callback {
             mListener.onFailure(new OkHttpException(OTHER_ERROR, e.getMessage()));
             e.printStackTrace();
         }
+
+
+
+
+
     }
     }

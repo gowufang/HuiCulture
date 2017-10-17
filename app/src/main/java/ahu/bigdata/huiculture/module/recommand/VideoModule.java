@@ -6,20 +6,12 @@ package ahu.bigdata.huiculture.module.recommand;
  */
 public class VideoModule {
 
+    String url;
     String path;
     String name;
     int size;
-    int modified;
+    double modified;
     boolean isdir;
-    String url;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getUrl() {
         return url;
@@ -37,6 +29,14 @@ public class VideoModule {
         this.path = path;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getSize() {
         return size;
     }
@@ -45,11 +45,11 @@ public class VideoModule {
         this.size = size;
     }
 
-    public int getModified() {
+    public double getModified() {
         return modified;
     }
 
-    public void setModified(int modified) {
+    public void setModified(double modified) {
         this.modified = modified;
     }
 

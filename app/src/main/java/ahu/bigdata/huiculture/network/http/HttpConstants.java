@@ -9,17 +9,18 @@ import ahu.bigdata.huiculture.constant.Constant;
 public class HttpConstants {
 
     /**
-     * 测试网址
+     * 测试网址,记住加Http请求头
      */
-    private static final String TEST_URL = "hz-api.cnwangjie.com";
+    private static final String TEST_URL = "http://hz-api.cnwangjie.com";
     /**
      * 所有静态资源列表
      */
-    public static final String VIDEO_LIST = "/api/resource/list";
+    public static final String VIDEO_LIST = TEST_URL+"/api/resource/list";
     /**
      * 最新文章列表
      */
     public static final String LASTED_ARTICLE = "/api/article/lastest";
+
 
 
     /**
