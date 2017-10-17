@@ -9,10 +9,13 @@ import com.youdu.okhttp.listener.DisposeDataHandle;
 import com.youdu.okhttp.listener.DisposeDataListener;
 import com.youdu.okhttp.listener.DisposeHandleCookieListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -111,7 +114,32 @@ public class CommonJsonCallback implements Callback {
             mListener.onFailure(new OkHttpException(NETWORK_ERROR, EMPTY_MSG));
             return;
         }
-
+//        //尝试解析
+//        try {
+//            JSONArray jsonArray = new JSONArray(responseObj.toString());
+//            for (int i = 0; i < jsonArray.length(); i++) {
+//                //尝试解析
+//                try {
+//                    JSONObject result = jsonArray.getJSONObject(i);
+//
+//                    if (mClass == null) {
+//                        mListener.onSuccess(responseObj);
+//                    } else {
+//                        //实例化
+//                        Object obj = ResponseEntityToModule.parseJsonObjectToModule(result, mClass);
+//                        if (obj != null) {
+//                            mListener.onSuccess(obj);
+//                        } else {
+//                            mListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
+//                        }
+//                    }
+//                } catch (JSONException e1) {
+//                    e1.printStackTrace();
+//                }
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         try {
             /**
              * 协议确定后看这里如何修改
@@ -147,4 +175,4 @@ public class CommonJsonCallback implements Callback {
             e.printStackTrace();
         }
     }
-}
+    }
