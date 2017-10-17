@@ -40,6 +40,13 @@ public class RequestCenter {
         RequestCenter.postRequest(HttpConstants.HOME_RECOMMAND, null, listener, BaseRecommandModel.class);
     }
 
+    /**
+     *
+     * @param url
+     * @param path
+     * @param listener
+     * @function 下载文件
+     */
     public static void downloadFile(String url, String path, DisposeDownloadListener listener) {
         CommonOkHttpClient.downloadFile(CommonRequest.createGetRequest(url, null),
                 new DisposeDataHandle(listener, path));
