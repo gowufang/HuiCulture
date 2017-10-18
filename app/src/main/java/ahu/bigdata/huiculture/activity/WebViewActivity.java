@@ -2,7 +2,6 @@ package ahu.bigdata.huiculture.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -29,10 +28,7 @@ public class WebViewActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
-        /**
-         *显示箭头返回
-         */
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initView();
     }
 
@@ -49,6 +45,11 @@ public class WebViewActivity extends BaseActivity {
     }
 
     private void initView() {
+
+        /**
+         *显示箭头返回
+         */
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mProgrecessBar = (ProgressBar) findViewById(R.id.mProgressBar);
         mWebView = (WebView) findViewById(R.id.mWebView);

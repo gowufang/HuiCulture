@@ -80,6 +80,8 @@
         <activity android:name=".activity.CourseDetailActivity"></activity>
         <!--二维码界面-->
         <activity android:name=".zxing.app.CaptureActivity"></activity>
+        <!--登录界面-->
+        <activity android:name=".activity.LoginActivity"></activity>
     </application>
 
 </manifest>

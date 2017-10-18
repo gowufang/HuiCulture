@@ -11,6 +11,7 @@ import com.youdu.okhttp.request.RequestParams;
 import ahu.bigdata.huiculture.module.recommand.BaseRecommandModel;
 import ahu.bigdata.huiculture.module.recommand.VideoModule;
 import ahu.bigdata.huiculture.module.update.UpdateModel;
+import ahu.bigdata.huiculture.module.user.User;
 
 /**
  * Created by ych10 on 2017/10/3.
@@ -19,13 +20,28 @@ import ahu.bigdata.huiculture.module.update.UpdateModel;
 public class RequestCenter {
 
     /**
-     * 测试：用okHttp请求Video信息 失败 java.lang.IllegalArgumentException: unexpected url: /api/resource/list
+     * 测试：用okHttp请求Video信息 失败 java.lang.IllegalArgumentException: unexpected url: /api/resource/list 原因：没加Http
      */
     public static void requestVideoData(DisposeDataListener listener) {
         RequestCenter.postRequest(HttpConstants.VIDEO_LIST,null,listener, VideoModule.class);
     }
 
 
+
+    /**
+     * 用户登陆请求
+     *
+     * @param listener
+     * @param userName
+     * @param passwd
+     */
+    public static void login(String userName, String passwd, DisposeDataListener listener) {
+
+        RequestParams params = new RequestParams();
+        params.put("mb", userName);
+        params.put("pwd", passwd);
+        RequestCenter.postRequest(HttpConstants.LOGIN, params, listener, User.class);
+    }
 
     /****************************************************************************************************/
     /**
