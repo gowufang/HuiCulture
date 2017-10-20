@@ -93,20 +93,20 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             }
         });
 
-        RequestCenter.requestVideoData(new DisposeDataListener() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                L.d("Video   Success!");
-                mVideoModule = (VideoModule) responseObj;
-                mVideoList.add(mVideoModule);
-                L.d(L.TAG+mVideoList.get(0).getUrl());
-            }
-
-            @Override
-            public void onFailure(Object reasonObj) {
-                L.d("Video failure!");
-            }
-        });
+//        RequestCenter.requestVideoData(new DisposeDataListener() {
+//            @Override
+//            public void onSuccess(Object responseObj) {
+//                L.d("Video   Success!");
+//                mVideoModule = (VideoModule) responseObj;
+//                mVideoList.add(mVideoModule);
+//                L.d(L.TAG+mVideoList.get(0).getUrl());
+//            }
+//
+//            @Override
+//            public void onFailure(Object reasonObj) {
+//                L.d("Video failure!");
+//            }
+//        });
     }
 
     /**

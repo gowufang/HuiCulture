@@ -82,6 +82,8 @@
         <activity android:name=".zxing.app.CaptureActivity"></activity>
         <!--登录界面-->
         <activity android:name=".activity.LoginActivity"></activity>
+        <!---->
+        <activity android:name=".activity.PhotoViewActivity"></activity>
     </application>
 
 </manifest>
