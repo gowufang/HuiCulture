@@ -47,11 +47,12 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     private static final String TAG = "MraidVideoView";
     private static final int TIME_MSG = 0x01;
     private static final int TIME_INVAL = 1000;
+    //播放器生命周期状态
     private static final int STATE_ERROR = -1;
     private static final int STATE_IDLE = 0;
     private static final int STATE_PLAYING = 1;
     private static final int STATE_PAUSING = 2;
-    private static final int LOAD_TOTAL_COUNT = 3;
+    private static final int LOAD_TOTAL_COUNT = 3;//加载失败，重试3次
     /**
      * UI
      */
@@ -62,15 +63,15 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     private ImageView mFullBtn;
     private ImageView mLoadingBar;
     private ImageView mFrameView;
-    private AudioManager audioManager;
+    private AudioManager audioManager;//音量控制器
     private Surface videoSurface;
 
     /**
      * Data
      */
-    private String mUrl;
+    private String mUrl;//要加载的视频地址
     private String mFrameURI;
-    private boolean isMute;
+    private boolean isMute;//是否静音
     private int mScreenWidth, mDestationHeight;
 
     /**
@@ -80,11 +81,12 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     private boolean mIsRealPause;
     private boolean mIsComplete;
     private int mCurrentCount;
-    private int playerState = STATE_IDLE;
+    private int playerState = STATE_IDLE;//默认处于空闲状态
 
     private MediaPlayer mediaPlayer;
     private ADVideoPlayerListener listener;
-    private ScreenEventReceiver mScreenReceiver;
+    private ScreenEventReceiver mScreenReceiver;//监听屏幕是否锁屏广播
+    //每隔1s通知服务器播放器状态，尽量不用易内存泄漏的Timer
     private Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
@@ -158,6 +160,11 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         return mIsComplete;
     }
 
+    /**
+     *  在View的显示发生改变时会回调此方法
+     * @param changedView
+     * @param visibility
+     */
     @Override
     protected void onVisibilityChanged(View changedView, int visibility) {
         LogUtils.e(TAG, "onVisibilityChanged" + visibility);
@@ -179,7 +186,9 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         super.onDetachedFromWindow();
     }
 
-
+    /**
+     * 防止与副容器产生的点击事件冲突
+     */
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         return true;
@@ -238,6 +247,10 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         }
     }
 
+    /**
+     * 在视频播放完成时回调
+     * @param mp
+     */
     @Override
     public void onCompletion(MediaPlayer mp) {
         if (listener != null) {
@@ -248,6 +261,9 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         setIsRealPause(true);
     }
 
+    /**
+     *播放器产生异常时回调
+     */
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
         LogUtils.e(TAG, "do error:" + what);
@@ -270,6 +286,10 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     public boolean onInfo(MediaPlayer mp, int what, int extra) {
         return true;
     }
+
+    /**
+     * 播放器处于就绪状态
+     */
 
     @Override
     public void onPrepared(MediaPlayer mp) {
@@ -308,6 +328,9 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         mFrameURI = url;
     }
 
+    /**
+     * 加载视频Url
+     */
     public void load() {
         if (this.playerState != STATE_IDLE) {
             return;
@@ -326,6 +349,9 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         }
     }
 
+    /**
+     * 暂停视频
+     */
     public void pause() {
         if (this.playerState != STATE_PLAYING) {
             return;
@@ -372,6 +398,9 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         return 0;
     }
 
+    /**
+     * 从小屏跳转到播放大屏
+     */
     //跳到指定点播放视频
     public void seekAndResume(int position) {
         if (mediaPlayer != null) {
@@ -409,6 +438,10 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         }
     }
 
+
+    /**
+     * 恢复视频
+     */
     public void resume() {
         if (this.playerState != STATE_PAUSING) {
             return;
@@ -439,7 +472,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         playerState = state;
     }
 
-    //播放完成后回到初始状态
+    //播放完成后回到初始状态，让播放流跳转到0，处于暂停状态
     public void playBack() {
         LogUtils.d(TAG, " do playBack");
         setCurrentPlayState(STATE_PAUSING);
@@ -452,6 +485,9 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         this.showPauseView(false);
     }
 
+    /**
+     * 停止，只能再Prepare
+     */
     public void stop() {
         LogUtils.d(TAG, " do stop");
         if (this.mediaPlayer != null) {
@@ -470,6 +506,10 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
             showPauseView(false); //显示暂停状态
         }
     }
+
+    /**
+     * 销毁当前我们自定义的View
+     */
 
     public void destroy() {
         LogUtils.d(TAG, " do destroy");
@@ -567,6 +607,10 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
             });
         }
     }
+
+    /**
+     * 最重要！表明TextureAvailable处于就绪状态
+     */
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
