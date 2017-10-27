@@ -706,22 +706,22 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
 
         public void onAdVideoLoadFailed();
 
-        public void onAdVideoLoadComplete();
-    }
+    public void onAdVideoLoadComplete();
+}
 
-    public interface ADFrameImageLoadListener {
+public interface ADFrameImageLoadListener {
 
-        void onStartFrameLoad(String url, ImageLoaderListener listener);
-    }
+    void onStartFrameLoad(String url, ImageLoaderListener listener);
+}
 
-    public interface ImageLoaderListener {
-        /**
-         * 如果图片下载不成功，传null
-         *
-         * @param loadedImage
-         */
-        void onLoadingComplete(Bitmap loadedImage);
-    }
+public interface ImageLoaderListener {
+    /**
+     * 如果图片下载不成功，传null
+     *
+     * @param loadedImage
+     */
+    void onLoadingComplete(Bitmap loadedImage);
+}
 
 
 }
