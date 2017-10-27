@@ -161,7 +161,8 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     }
 
     /**
-     *  在View的显示发生改变时会回调此方法
+     * 在View的显示发生改变时会回调此方法
+     *
      * @param changedView
      * @param visibility
      */
@@ -249,6 +250,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
 
     /**
      * 在视频播放完成时回调
+     *
      * @param mp
      */
     @Override
@@ -256,13 +258,15 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         if (listener != null) {
             listener.onAdVideoLoadComplete();
         }
-        playBack();
         setIsComplete(true);
+        //暂停有两种：1.划出品目自动暂停，会俩自动播放 2.真正暂停
         setIsRealPause(true);
+        //回到初始状态
+        playBack();
     }
 
     /**
-     *播放器产生异常时回调
+     * 播放器产生异常时回调
      */
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
@@ -278,8 +282,9 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
                 listener.onAdVideoLoadFailed();
             }
         }
-        this.stop();//去重新load
+        this.stop();//去重新load，如果次数>3,不加载
         return true;
+        //系统不会再处理
     }
 
     @Override
@@ -302,16 +307,8 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
             if (listener != null) {
                 listener.onAdVideoLoadSuccess();
             }
-            //满足自动播放条件，则直接播放
-            if (Utils.canAutoPlay(getContext(),
-                    AdParameters.getCurrentSetting()) &&
-                    Utils.getVisiblePercent(mParentContainer) > SDKConstant.VIDEO_SCREEN_PERCENT) {
-                setCurrentPlayState(STATE_PAUSING);
-                resume();
-            } else {
-                setCurrentPlayState(STATE_PLAYING);
-                pause();
-            }
+            decideCanPlay();
+
         }
     }
 
@@ -335,17 +332,17 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         if (this.playerState != STATE_IDLE) {
             return;
         }
-        LogUtils.d(TAG, "do play url = " + this.mUrl);
-        showLoadingView();
         try {
+            showLoadingView();
+            //当前状态为空闲
             setCurrentPlayState(STATE_IDLE);
+            //检查播放器状态
             checkMediaPlayer();
-            mute(true);
-            mediaPlayer.setDataSource(this.mUrl);
-            mediaPlayer.prepareAsync(); //开始异步加载
+            mediaPlayer.setDataSource(mUrl);
+            //异步加载视频
+            mediaPlayer.prepareAsync();
         } catch (Exception e) {
-            LogUtils.e(TAG, e.getMessage());
-            stop(); //error以后重新调用stop加载
+            stop();
         }
     }
 
@@ -359,6 +356,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         LogUtils.d(TAG, "do pause");
         setCurrentPlayState(STATE_PAUSING);
         if (isPlaying()) {
+            //真正完成暂停
             mediaPlayer.pause();
             if (!this.canPlay) {
                 this.mediaPlayer.seekTo(0);
@@ -448,11 +446,11 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         }
         LogUtils.d(TAG, "do resume");
         if (!isPlaying()) {
-            entryResumeState();
+            entryResumeState();//置为播放中的状态
+            showPauseView(true);
             mediaPlayer.setOnSeekCompleteListener(null);
             mediaPlayer.start();
             mHandler.sendEmptyMessage(TIME_MSG);
-            showPauseView(true);
         } else {
             showPauseView(false);
         }
@@ -479,6 +477,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         mHandler.removeCallbacksAndMessages(null);
         if (mediaPlayer != null) {
             mediaPlayer.setOnSeekCompleteListener(null);
+            //跳转到第0s
             mediaPlayer.seekTo(0);
             mediaPlayer.pause();
         }
@@ -489,6 +488,8 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
      * 停止，只能再Prepare
      */
     public void stop() {
+
+        //清空播放器
         LogUtils.d(TAG, " do stop");
         if (this.mediaPlayer != null) {
             this.mediaPlayer.reset();
@@ -499,6 +500,8 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         }
         mHandler.removeCallbacksAndMessages(null);
         setCurrentPlayState(STATE_IDLE);
+
+        //重试加载3次
         if (mCurrentCount < LOAD_TOTAL_COUNT) { //满足重新加载的条件
             mCurrentCount += 1;
             load();
@@ -652,11 +655,16 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     }
 
     private void decideCanPlay() {
-        if (Utils.getVisiblePercent(mParentContainer) > SDKConstant.VIDEO_SCREEN_PERCENT)
-            //来回切换页面时，只有 >50,且满足自动播放条件才自动播放
+        //满足自动播放条件，则直接播放
+        if (Utils.canAutoPlay(getContext(), AdParameters.getCurrentSetting()) &&
+                Utils.getVisiblePercent(mParentContainer) > SDKConstant.VIDEO_SCREEN_PERCENT) {
+            setCurrentPlayState(STATE_PAUSING);
+            //来回切换页面只有>50
             resume();
-        else
+        } else {
+            setCurrentPlayState(STATE_PLAYING);
             pause();
+        }
     }
 
     /**
@@ -706,22 +714,22 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
 
         public void onAdVideoLoadFailed();
 
-    public void onAdVideoLoadComplete();
-}
+        public void onAdVideoLoadComplete();
+    }
 
-public interface ADFrameImageLoadListener {
+    public interface ADFrameImageLoadListener {
 
-    void onStartFrameLoad(String url, ImageLoaderListener listener);
-}
+        void onStartFrameLoad(String url, ImageLoaderListener listener);
+    }
 
-public interface ImageLoaderListener {
-    /**
-     * 如果图片下载不成功，传null
-     *
-     * @param loadedImage
-     */
-    void onLoadingComplete(Bitmap loadedImage);
-}
+    public interface ImageLoaderListener {
+        /**
+         * 如果图片下载不成功，传null
+         *
+         * @param loadedImage
+         */
+        void onLoadingComplete(Bitmap loadedImage);
+    }
 
 
 }

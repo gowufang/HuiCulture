@@ -1,6 +1,7 @@
 package ahu.bigdata.huiculture.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +12,21 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.youdu.activity.AdBrowserActivity;
 import com.youdu.adutil.Utils;
+import com.youdu.core.AdContextInterface;
+import com.youdu.core.video.VideoAdContext;
 
 import java.util.ArrayList;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.module.recommand.RecommandBodyValue;
+import ahu.bigdata.huiculture.share.ShareDialog;
 import ahu.bigdata.huiculture.utils.ImageLoaderManager;
 import ahu.bigdata.huiculture.utils.Util;
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.internal.platform.Platform;
 
 /**
  * Created by ych10 on 2017/10/7.
@@ -42,7 +49,7 @@ public class CourseAdapter extends BaseAdapter{
     
     private ArrayList<RecommandBodyValue> mData;
     private ImageLoaderManager mImagerLoader;
-
+    private VideoAdContext mAdsdkContext;
     /**
      * 构造方法
      * @param context
@@ -132,7 +139,6 @@ public class CourseAdapter extends BaseAdapter{
                     mViewHolder.mProductView = (ImageView) convertView.findViewById(R.id.product_photo_view);
                     break;
                 case CARD_VIEW_PAGER:
-
                     mViewHolder = new ViewHolder();
                     convertView = mInflate.inflate(R.layout.item_product_card_view_pager_layout,parent,false);
                     mViewHolder.mViewPager = (ViewPager) convertView.findViewById(R.id.pager);
@@ -146,6 +152,37 @@ public class CourseAdapter extends BaseAdapter{
                      * 让ViewPager一开始就从中间开始，即可实现从两个方向滑动
                      */
                     mViewHolder.mViewPager.setCurrentItem(RecommandBodyList.size()*100);
+                    break;
+                case VIDOE_TYPE:
+                    //显示video卡片
+                    mViewHolder = new ViewHolder();
+                    convertView = mInflate.inflate(R.layout.item_video_layout, parent, false);
+                    mViewHolder.mVieoContentLayout = (RelativeLayout)
+                            convertView.findViewById(R.id.video_ad_layout);
+                    mViewHolder.mLogoView = (CircleImageView) convertView.findViewById(R.id.item_logo_view);
+                    mViewHolder.mTitleView = (TextView) convertView.findViewById(R.id.item_title_view);
+                    mViewHolder.mInfoView = (TextView) convertView.findViewById(R.id.item_info_view);
+                    mViewHolder.mFooterView = (TextView) convertView.findViewById(R.id.item_footer_view);
+                    mViewHolder.mShareView = (ImageView) convertView.findViewById(R.id.item_share_view);
+                    //为对应布局创建播放器
+                    mAdsdkContext = new VideoAdContext(mViewHolder.mVieoContentLayout,
+                            new Gson().toJson(value), null);
+                    mAdsdkContext.setAdResultListener(new AdContextInterface() {
+                        @Override
+                        public void onAdSuccess() {
+                        }
+
+                        @Override
+                        public void onAdFailed() {
+                        }
+
+                        @Override
+                        public void onClickVideo(String url) {
+                            Intent intent = new Intent(mContext, AdBrowserActivity.class);
+                            intent.putExtra(AdBrowserActivity.KEY_URL, url);
+                            mContext.startActivity(intent);
+                        }
+                    });
                     break;
 
             }
@@ -161,7 +198,6 @@ public class CourseAdapter extends BaseAdapter{
         switch (type) {
 
             case CARD_MULTI_PIC:
-
                 mViewHolder.mTitleView.setText(value.title);
                 mViewHolder.mInfoView.setText(value.info.concat(mContext.getString(R.string.tian_qian)));
                 mViewHolder.mFooterView.setText(value.text);
@@ -182,7 +218,6 @@ public class CourseAdapter extends BaseAdapter{
                 }
                 break;
             case CARD_SINGNAL_PIC:
-
                 mViewHolder.mTitleView.setText(value.title);
                 mViewHolder.mInfoView.setText(value.info.concat(mContext.getString(R.string.tian_qian)));
                 mViewHolder.mFooterView.setText(value.text);
@@ -193,6 +228,27 @@ public class CourseAdapter extends BaseAdapter{
                 //为单个ImageView加载远程图片
                 mImagerLoader.displayImage(mViewHolder.mProductView, value.url.get(0));
             case CARD_VIEW_PAGER:
+                break;
+
+            case VIDOE_TYPE:
+                mImagerLoader.displayImage(mViewHolder.mLogoView, value.logo);
+                mViewHolder.mTitleView.setText(value.title);
+                mViewHolder.mInfoView.setText(value.info.concat(mContext.getString(R.string.tian_qian)));
+                mViewHolder.mFooterView.setText(value.text);
+                    mViewHolder.mShareView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+//                            ShareDialog dialog = new ShareDialog(mContext, false);
+//                            dialog.setShareType(Platform.SHARE_VIDEO);
+//                            dialog.setShareTitle(value.title);
+//                            dialog.setShareTitleUrl(value.site);
+//                            dialog.setShareText(value.text);
+//                            dialog.setShareSite(value.title);
+//                            dialog.setShareTitle(value.site);
+//                            dialog.setUrl(value.resource);
+//                            dialog.show();
+                        }
+                    });
                 break;
         }
         return convertView;
