@@ -81,7 +81,15 @@
         <!--二维码界面-->
         <activity android:name=".zxing.app.CaptureActivity"></activity>
         <!--登录界面-->
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity
+            android:theme="@style/FullScreen"
+            android:name=".activity.LoginActivity"
+            android:label="登录"></activity>
+        <!--注册-->
+        <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:name=".activity.RegisterActivity"
+            android:label="注册"></activity>
         <!---->
         <activity android:name=".activity.PhotoViewActivity"></activity>
     </application>

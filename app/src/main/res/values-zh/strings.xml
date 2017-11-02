@@ -5,4 +5,7 @@
     <string name="title_person">个人</string>
     <string name="home_edittext_hint">请输入关键字</string>
     <string name="search_history">搜索历史</string>
+    <string name="remember_password">记住密码</string>
+    <string name="register">注册</string>
+    <string name="forget_password">忘记密码</string>
 </resources>

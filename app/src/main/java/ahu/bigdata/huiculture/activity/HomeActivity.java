@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.tencent.bugly.crashreport.CrashReport;
+
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
 import ahu.bigdata.huiculture.fragment.home.CloudFragment;
@@ -39,6 +41,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         initData();
         initView();
+
     }
 
     private void initData() {
