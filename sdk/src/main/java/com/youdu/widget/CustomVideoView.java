@@ -32,10 +32,9 @@ import com.youdu.constant.SDKConstant;
 import com.youdu.core.AdParameters;
 import com.youdu.vuandroidadsdk.R;
 
-
 /**
  * @authour qndroid
- * @function 负责广告播放，暂停，事件触发
+ * @function 负责广告播放，暂停，事件触发，自定义视频播放核心类
  * @date 2016/6/18
  */
 public class CustomVideoView extends RelativeLayout implements View.OnClickListener,
