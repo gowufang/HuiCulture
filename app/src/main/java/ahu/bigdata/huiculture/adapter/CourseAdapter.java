@@ -108,22 +108,22 @@ public class CourseAdapter extends BaseAdapter{
             /**
              *初始化
              */
-            switch (type) {
-                //多图Item
-                case CARD_MULTI_PIC:
-                    mViewHolder = new ViewHolder();
-                    //root会协助linearlayout的根节点生成布局参数
-                    convertView = mInflate.inflate(R.layout.item_product_card_multi_layout, parent, false);
-                    //初始化控件
-                    mViewHolder.mLogoView = (CircleImageView) convertView.findViewById(R.id.item_logo_view);
-                    mViewHolder.mTitleView = (TextView) convertView.findViewById(R.id.item_title_view);
-                    mViewHolder.mInfoView = (TextView) convertView.findViewById(R.id.item_info_view);
-                    mViewHolder.mFooterView = (TextView) convertView.findViewById(R.id.item_footer_view);
-                    mViewHolder.mPriceView = (TextView) convertView.findViewById(R.id.item_price_view);
-                    mViewHolder.mFromView = (TextView) convertView.findViewById(R.id.item_from_view);
-                    mViewHolder.mZanView = (TextView) convertView.findViewById(R.id.item_zan_view);
-                    mViewHolder.mProductLayout = (LinearLayout) convertView.findViewById(R.id.product_photo_layout);
-                    break;
+                switch (type) {
+                    //多图Item
+                    case CARD_MULTI_PIC:
+                        mViewHolder = new ViewHolder();
+                        //root会协助linearlayout的根节点生成布局参数
+                        convertView = mInflate.inflate(R.layout.item_product_card_multi_layout, parent, false);
+                        //初始化控件
+                        mViewHolder.mLogoView = (CircleImageView) convertView.findViewById(R.id.item_logo_view);
+                        mViewHolder.mTitleView = (TextView) convertView.findViewById(R.id.item_title_view);
+                        mViewHolder.mInfoView = (TextView) convertView.findViewById(R.id.item_info_view);
+                        mViewHolder.mFooterView = (TextView) convertView.findViewById(R.id.item_footer_view);
+                        mViewHolder.mPriceView = (TextView) convertView.findViewById(R.id.item_price_view);
+                        mViewHolder.mFromView = (TextView) convertView.findViewById(R.id.item_from_view);
+                        mViewHolder.mZanView = (TextView) convertView.findViewById(R.id.item_zan_view);
+                        mViewHolder.mProductLayout = (LinearLayout) convertView.findViewById(R.id.product_photo_layout);
+                        break;
                 //单图Item
                 case CARD_SINGNAL_PIC:
                     mViewHolder = new ViewHolder();
@@ -227,6 +227,7 @@ public class CourseAdapter extends BaseAdapter{
                 mImagerLoader.displayImage(mViewHolder.mLogoView, value.logo);
                 //为单个ImageView加载远程图片
                 mImagerLoader.displayImage(mViewHolder.mProductView, value.url.get(0));
+
             case CARD_VIEW_PAGER:
                 break;
 
