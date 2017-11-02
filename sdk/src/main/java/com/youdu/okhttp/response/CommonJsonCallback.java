@@ -114,6 +114,7 @@ public class CommonJsonCallback implements Callback {
             mListener.onFailure(new OkHttpException(NETWORK_ERROR, EMPTY_MSG));
             return;
         }
+//
 //        /****************************我自己的********************************/
 //        //尝试解析
 //        try {
@@ -193,5 +194,9 @@ public class CommonJsonCallback implements Callback {
             e.printStackTrace();
         }
 
+
+
+
+
     }
-}
+    }

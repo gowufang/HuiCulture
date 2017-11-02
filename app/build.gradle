@@ -2,10 +2,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.0'
-
-    /*兼容Android6.0系统所需，如果这句话报错，可在dependencies标签下使用compile 'cn.bmob.android:http-legacy:1.0'*/
-    useLibrary 'org.apache.http.legacy'
-
    /*禁止gradle检查png的合法性*/
     aaptOptions {
         cruncherEnabled = false
@@ -60,12 +56,6 @@ dependencies {
     compile files('libs/photoview-library-1.2.2.jar')
     compile files('libs/zxing.jar')
     compile 'com.google.code.gson:gson:2.8.2'
-
-    //Bmob集成
-    //3.5.5：请务必查看下面注释[1]
-    compile 'cn.bmob.android:bmob-sdk:3.5.5'
-    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
-    compile 'cn.bmob.android:http-legacy:1.0'
 }
 
 repositories {
