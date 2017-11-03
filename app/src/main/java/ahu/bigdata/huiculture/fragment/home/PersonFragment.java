@@ -74,6 +74,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
 
     public PersonFragment() {
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,11 +84,12 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
-        mContentView= inflater.inflate(R.layout.fragment_person_layout,null);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mContentView = inflater.inflate(R.layout.fragment_person_layout, null);
         initView();
         return mContentView;
     }
+
     private void initView() {
 
         mLoginLayout = (RelativeLayout) mContentView.findViewById(R.id.login_layout);
@@ -125,8 +127,6 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         btn_picture.setOnClickListener(this);
         btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
         btn_cancel.setOnClickListener(this);
-
-
     }
 
 
@@ -192,7 +192,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btn_picture:
                 toPicture();
-                break;   
+                break;
         }
     }
 
@@ -241,6 +241,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
             }
         }
     }
+
     //裁剪
     private void startPhotoZoom(Uri uri) {
         if (uri == null) {
@@ -295,7 +296,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     public void onDestroyView() {
         super.onDestroyView();
         //保存
-        Util.putImageToShare(getActivity(),mUserPhotoView);
+        Util.putImageToShare(getActivity(), mUserPhotoView);
     }
 
     /**
@@ -317,5 +318,4 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
             }
         }
     }
-
 }

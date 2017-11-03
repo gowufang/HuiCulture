@@ -1,6 +1,6 @@
 package ahu.bigdata.huiculture.module.recommand;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
 /**
  * Created by YCH on 2017/10/5.
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class RecommandHeadValue {
 
     public ArrayList<String> ads;
-public ArrayList<String> middle;
-public ArrayList<RecommandFooterValue> footer;
-        }
+    public ArrayList<String> middle;
+    public ArrayList<RecommandFooterValue> footer;
+
+}
