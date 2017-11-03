@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,6 @@ import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.client.HttpParams;
 import com.youdu.activity.AdBrowserActivity;
 import com.youdu.okhttp.listener.DisposeDataListener;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +36,6 @@ import ahu.bigdata.huiculture.network.http.RequestCenter;
 import ahu.bigdata.huiculture.utils.L;
 import ahu.bigdata.huiculture.view.home.HomeHeaderLayout;
 import ahu.bigdata.huiculture.zxing.app.CaptureActivity;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.QueryListener;
 
 /**
  * Created by ych10 on 2017/9/21.
@@ -94,32 +88,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onFailure(Object reasonObj) {
                 //提示用户网络有问题
-                L.e(L.TAG + "------OnFailure:-------:" + reasonObj.toString());
+                L.e(L.TAG+"------OnFailure:-------:"+reasonObj.toString());
                 Toast.makeText(mContext, "请检查网络设置哦", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-//        /**
-//         * 查询数据
-//         */
-//    public void queryData(){
-//        BmobQuery query =new BmobQuery("Person");
-//        query.addWhereEqualTo("age", 25);
-//        query.setLimit(2);
-//        query.order("createdAt");
-//        //v3.5.0版本提供`findObjectsByTable`方法查询自定义表名的数据
-//        query.findObjectsByTable(new QueryListener<JSONArray>() {
-//            @Override
-//            public void done(JSONArray ary, BmobException e) {
-//                if(e==null){
-//                    Log.i("bmob","查询成功："+ary.toString());
-//                }else{
-//                    Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
-//                }
-//            }
-//        });
-
-
 
 //        RequestCenter.requestVideoData(new DisposeDataListener() {
 //            @Override
@@ -135,9 +107,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 //                L.d("Video failure!");
 //            }
 //        });
-//    }
-
-
+    }
 
     /**
      * 请求成功
@@ -147,8 +117,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         if (mRecommanddata != null && mRecommanddata.data.list.size() > 0) {
             mLoadingView.setVisibility(View.GONE);
             mListView.setVisibility(View.VISIBLE);
-
-
             //添加自定义头布局，ListView的add可重复添加，set会覆盖
             mListView.addHeaderView(new HomeHeaderLayout(mContext,mRecommanddata.data.head));
             //创建Adapter
