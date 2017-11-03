@@ -38,10 +38,10 @@ public class CourseAdapter extends BaseAdapter{
      * 不同类型的Item类型
      */
     private static final int CARD_COUNT = 4;
-    private static final int VIDOE_TYPE = 0x00;//视频Item
+    private static final int VIDOE_TYPE = 0x00;
     private static final int CARD_MULTI_PIC = 0x01;//多图Item
     private static final int CARD_SINGNAL_PIC = 0x02;//单图Item
-    private static final int CARD_VIEW_PAGER = 0x03;//无限循环ViewPager
+    private static final int CARD_VIEW_PAGER = 0x03;
 
     private Context mContext;
     private ViewHolder mViewHolder;

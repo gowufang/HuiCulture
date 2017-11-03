@@ -10,8 +10,7 @@ public class RecommandModel {
     /**
      *Json的两个部分
      */
-    public RecommandHeadValue head;
     public ArrayList<RecommandBodyValue> list;
-
+    public RecommandHeadValue head;
 
 }
