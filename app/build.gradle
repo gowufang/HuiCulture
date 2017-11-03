@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
 
     /*兼容Android6.0系统所需，如果这句话报错，可在dependencies标签下使用compile 'cn.bmob.android:http-legacy:1.0'*/
     useLibrary 'org.apache.http.legacy'
@@ -51,7 +51,7 @@ dependencies {
     //UniverseImageLoader
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //Rxvolley
-    compile ('com.kymjs.rxvolley:rxvolley:1.1.4'){
+    compile('com.kymjs.rxvolley:rxvolley:1.1.4') {
         exclude group: "io.reactivex"
     }
     //CircleImageView
@@ -67,17 +67,15 @@ dependencies {
     compile files('libs/photoview-library-1.2.2.jar')
     compile files('libs/zxing.jar')
     compile 'com.google.code.gson:gson:2.8.2'
-
     //Bugly集成
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
     compile 'com.tencent.bugly:crashreport:latest.release'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
-
     //Bmob集成
     //3.5.5：请务必查看下面注释[1]
-    compile ('cn.bmob.android:bmob-sdk:3.5.5'){
-            exclude group: "io.reactivex"
+    compile('cn.bmob.android:bmob-sdk:3.5.5') {
+        exclude group: "io.reactivex"
     }
     //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
     compile 'cn.bmob.android:http-legacy:1.0'
@@ -85,4 +83,5 @@ dependencies {
 
 repositories {
     flatDir { dirs 'libs' }
+    google()
 }
