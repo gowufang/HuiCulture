@@ -154,6 +154,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             //创建Adapter
             mAdapter = new CourseAdapter(mContext,mRecommanddata.data.list);
             mListView.setAdapter(mAdapter);
+
         } else {
             showErrorView();
         }
@@ -164,8 +165,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
      * 请求失败
      */
     private void showErrorView() {
-
-
     }
 
     @Override
