@@ -2,12 +2,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'realm-android'
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     dexOptions {
         jumboMode = true
@@ -19,19 +20,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
-            //指定输出文件名
-            libraryVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def outputFile = output.outputFile
-                    if (outputFile != null && outputFile.name.endsWith('aar')) {
-                        def fileName = "vuandroidadsdk.aar"
-                        output.outputFile = new File(outputFile.parent, fileName)
-                    }
+            android.libraryVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "vuandroidadsdk.aar"
                 }
             }
         }
     }
+
     productFlavors {
     }
     sourceSets { main { java.srcDirs = ['src/main/java', 'src/main/java/2'] } }
@@ -40,11 +36,12 @@ android {
 dependencies {
     testCompile 'junit:junit:4.12'
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
-    compile 'com.squareup.okhttp3:okhttp:3.3.0'
-    //okttp依赖
+    //OkHttp
+    //compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    //UniverseImageLoader
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    //RichText
+    compile 'com.zzhoujay.richtext:richtext:2.5.4'
     //    compile project(':sdk')
     //retrofit基于okhttp的一个新的请求框架
     //compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -56,12 +53,11 @@ dependencies {
     //compile 'io.reactivex:rxjava-math:1.0.0'
     //compile 'com.jakewharton.rxbinding:rxbinding:0.2.0'
     //compile 'com.jakewharton.rxrelay:rxrelay:1.2.0'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    compile 'com.zzhoujay.richtext:richtext:2.5.4'
 }
 
 repositories {
     flatDir {
         dirs 'libs'
     }
+    google()
 }
