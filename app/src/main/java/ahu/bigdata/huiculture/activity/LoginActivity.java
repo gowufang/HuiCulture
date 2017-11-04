@@ -7,17 +7,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.youdu.okhttp.listener.DisposeDataListener;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
 import ahu.bigdata.huiculture.manager.UserManager;
 import ahu.bigdata.huiculture.module.user.User;
-import ahu.bigdata.huiculture.network.http.RequestCenter;
-import ahu.bigdata.huiculture.utils.L;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 

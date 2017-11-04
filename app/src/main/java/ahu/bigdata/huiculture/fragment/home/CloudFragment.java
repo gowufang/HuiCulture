@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.youdu.activity.AdBrowserActivity;
+
 import java.util.ArrayList;
 
 import ahu.bigdata.huiculture.R;
@@ -79,9 +81,9 @@ public class CloudFragment extends BaseFragment implements AdapterView.OnItemCli
      * 传递Url给WebView
      */
     private void conveyURL(int position) {
-        Intent intent = new Intent(mContext, WebViewActivity.class);
-        intent.putExtra("url",Constant.LogoWebUrl[position]);
-        intent.putExtra("title", Constant.LogoTextUrl[position]);
+        Intent intent = new Intent(mContext, AdBrowserActivity.class);
+        intent.putExtra(AdBrowserActivity.KEY_URL, Constant.LogoWebUrl[position]);
+        mContext.startActivity(intent);
         startActivity(intent);
     }
 }

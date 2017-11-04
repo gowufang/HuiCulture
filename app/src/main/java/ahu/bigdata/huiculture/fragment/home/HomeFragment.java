@@ -133,7 +133,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
      */
     private void showErrorView() {
 
-
     }
 
     @Override
@@ -163,8 +162,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         mListView.setOnItemClickListener(this);
 
     }
-
-
 
     @Override
     public void onClick(View v) {

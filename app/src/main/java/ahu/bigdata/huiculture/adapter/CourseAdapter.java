@@ -22,11 +22,9 @@ import java.util.ArrayList;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.module.recommand.RecommandBodyValue;
-import ahu.bigdata.huiculture.share.ShareDialog;
 import ahu.bigdata.huiculture.utils.ImageLoaderManager;
 import ahu.bigdata.huiculture.utils.Util;
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.internal.platform.Platform;
 
 /**
  * Created by ych10 on 2017/10/7.
