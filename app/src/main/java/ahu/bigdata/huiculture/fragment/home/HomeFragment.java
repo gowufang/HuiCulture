@@ -13,6 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kymjs.rxvolley.RxVolley;
+import com.kymjs.rxvolley.client.HttpCallback;
+import com.kymjs.rxvolley.client.HttpParams;
 import com.youdu.activity.AdBrowserActivity;
 import com.youdu.okhttp.listener.DisposeDataListener;
 
@@ -28,6 +31,7 @@ import ahu.bigdata.huiculture.fragment.BaseFragment;
 import ahu.bigdata.huiculture.module.recommand.BaseRecommandModel;
 import ahu.bigdata.huiculture.module.recommand.RecommandBodyValue;
 import ahu.bigdata.huiculture.module.recommand.VideoModule;
+import ahu.bigdata.huiculture.network.http.HttpConstants;
 import ahu.bigdata.huiculture.network.http.RequestCenter;
 import ahu.bigdata.huiculture.utils.L;
 import ahu.bigdata.huiculture.view.home.HomeHeaderLayout;
