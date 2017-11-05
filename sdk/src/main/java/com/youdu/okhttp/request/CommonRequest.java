@@ -139,30 +139,30 @@ public class CommonRequest {
         return new Request.Builder().url(urlBuilder.substring(0, urlBuilder.length() - 1)).get().build();
     }
 
-    /**
-     * 文件上传请求
-     *
-     * @return
-     */
-    private static final MediaType FILE_TYPE = MediaType.parse("application/octet-stream");
-
-    public static Request createMultiPostRequest(String url, RequestParams params) {
-
-        MultipartBody.Builder requestBody = new MultipartBody.Builder();
-        requestBody.setType(MultipartBody.FORM);
-        if (params != null) {
-
-            for (Map.Entry<String, Object> entry : params.fileParams.entrySet()) {
-                if (entry.getValue() instanceof File) {
-                    requestBody.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + entry.getKey() + "\""),
-                            RequestBody.create(FILE_TYPE, (File) entry.getValue()));
-                } else if (entry.getValue() instanceof String) {
-
-                    requestBody.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + entry.getKey() + "\""),
-                            RequestBody.create(null, (String) entry.getValue()));
-                }
-            }
-        }
-        return new Request.Builder().url(url).post(requestBody.build()).build();
-    }
+//    /**
+//     * 文件上传请求
+//     *
+//     * @return
+//     */
+//    private static final MediaType FILE_TYPE = MediaType.parse("application/octet-stream");
+//
+//    public static Request createMultiPostRequest(String url, RequestParams params) {
+//
+//        MultipartBody.Builder requestBody = new MultipartBody.Builder();
+//        requestBody.setType(MultipartBody.FORM);
+//        if (params != null) {
+//
+//            for (Map.Entry<String, Object> entry : params.fileParams.entrySet()) {
+//                if (entry.getValue() instanceof File) {
+//                    requestBody.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + entry.getKey() + "\""),
+//                            RequestBody.create(FILE_TYPE, (File) entry.getValue()));
+//                } else if (entry.getValue() instanceof String) {
+//
+//                    requestBody.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + entry.getKey() + "\""),
+//                            RequestBody.create(null, (String) entry.getValue()));
+//                }
+//            }
+//        }
+//        return new Request.Builder().url(url).post(requestBody.build()).build();
+//    }
 }

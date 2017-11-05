@@ -138,8 +138,8 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
             if (mLoginedLayout.getVisibility() == View.GONE) {
                 mLoginLayout.setVisibility(View.GONE);
                 mLoginedLayout.setVisibility(View.VISIBLE);
-                mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
-                mTickView.setText(UserManager.getInstance().getUser().getEmail());
+//                mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
+//                mTickView.setText(UserManager.getInstance().getUser().getEmail());
             }
         }
     }
@@ -309,8 +309,8 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                 if (mLoginedLayout.getVisibility() == View.GONE) {
                     mLoginLayout.setVisibility(View.GONE);
                     mLoginedLayout.setVisibility(View.VISIBLE);
-                    mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
-                    mTickView.setText(UserManager.getInstance().getUser().getEmail());
+//                    mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
+//                    mTickView.setText(UserManager.getInstance().getUser().getEmail());
 //                    mPhotoView.setImageResource(R.drawable.profile);
 //                    ImageLoaderUtil.getInstance(mContext).displayImage(mPhotoView,R.drawable.profile);
                 }

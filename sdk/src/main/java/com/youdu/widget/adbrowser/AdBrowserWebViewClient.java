@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -78,61 +80,6 @@ public class AdBrowserWebViewClient extends WebViewClient {
         }
     }
 
-    @Override
-    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        LogUtils.i(LOG_TAG, "shouldOverrideUrlLoading url=" + url);
-        Context context = view.getContext();
-
-        Uri uri;
-        try {
-            uri = Uri.parse(url);
-        } catch (NullPointerException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-        if (uri == null) {
-            return false;
-        }
-
-        String scheme = uri.getScheme();
-        String host = uri.getHost();
-
-        if (TextUtils.isEmpty(scheme)) {
-            return false;
-        }
-
-        if (scheme.equalsIgnoreCase(TEL_SCHEME)) {
-            Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-            resolveAndStartActivity(intent, context);
-
-        } else if (scheme.equalsIgnoreCase(MAILTO_SCHEME)) {
-            url = url.replaceFirst("mailto:", "");
-            url = url.trim();
-            Intent intent = new Intent(Intent.ACTION_SEND, uri);
-            intent.setType(HEADER_PLAIN_TEXT).putExtra(Intent.EXTRA_EMAIL, new String[]{url});
-            resolveAndStartActivity(intent, context);
-
-        } else if (scheme.equalsIgnoreCase(GEO_SCHEME)) {
-            Intent searchAddress = new Intent(Intent.ACTION_VIEW, uri);
-            resolveAndStartActivity(searchAddress, context);
-
-        } else if (scheme.equalsIgnoreCase(YOUTUBE_SCHEME)) {
-            leaveApp(url, context);
-
-        } else if (scheme.equalsIgnoreCase(HTTP_SCHEME)
-                || scheme.equalsIgnoreCase(HTTPS_SCHEME)) {
-            return checkHost(url, host, context);
-
-        } else if (scheme.equalsIgnoreCase(INTENT_SCHEME)) {
-            handleIntentScheme(url, context);
-        } else if (scheme.equalsIgnoreCase(MARKET_SCHEME)) {
-            handleMarketScheme(url, context);
-        } else {
-            return true;
-        }
-
-        return true;
-    }
 
     /**
      * Checks host
@@ -222,12 +169,12 @@ public class AdBrowserWebViewClient extends WebViewClient {
         super.onPageFinished(view, url);
         mListener.onPageFinished(view.canGoBack());
     }
-
-    @Override
-    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-        super.onReceivedError(view, errorCode, description, failingUrl);
-        String mess = "onReceivedError: " + description;
-        LogUtils.i(LOG_TAG, mess);
-        mListener.onReceiveError();
-    }
+//
+//    @Override
+//    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+//        super.onReceivedError(view, errorCode, description, failingUrl);
+//        String mess = "onReceivedError: " + description;
+//        LogUtils.i(LOG_TAG, mess);
+//        mListener.onReceiveError();
+//    }
 }

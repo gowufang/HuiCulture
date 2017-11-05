@@ -27,7 +27,7 @@
             android:layout_height="35dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/category" />
+            android:background="@drawable/voice" />
 
         <TextView
             android:id="@+id/search_view"

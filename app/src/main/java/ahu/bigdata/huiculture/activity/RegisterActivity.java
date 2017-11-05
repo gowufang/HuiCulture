@@ -12,8 +12,7 @@ import android.widget.Toast;
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
 import ahu.bigdata.huiculture.module.user.User;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
+
 
 /**
  * Created by YCH on 2017/11/2.
@@ -108,28 +107,28 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                 Toast.makeText(RegisterActivity.this, "请输入正确的邮箱格式！", Toast.LENGTH_SHORT).show();
 
                             } else {
-
-                                //注册
-                                User myUser=new User();
-                                myUser.setUsername(name);
-                                myUser.setPassword(pass);
-                                myUser.setEmail(email);
-                                myUser.setAge(Integer.parseInt(age));
-                                myUser.setSex(isGender);
-                                myUser.setDesc(desc);
-
-                                myUser.signUp(new SaveListener<User>() {
-                                    @Override
-                                    public void done(User myUser, BmobException e) {
-                                        if (e==null) {
-                                            Toast.makeText(RegisterActivity.this,"注册成功,请前往邮箱验证！",Toast.LENGTH_SHORT).show();
-                                            finish();
-                                        }else{
-                                            Toast.makeText(RegisterActivity.this,"注册失败!原因："+e.getMessage(),Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    }
-                                });
+//
+//                                //注册
+//                                User myUser=new User();
+//                                myUser.setUsername(name);
+//                                myUser.setPassword(pass);
+//                                myUser.setEmail(email);
+//                                myUser.setAge(Integer.parseInt(age));
+//                                myUser.setSex(isGender);
+//                                myUser.setDesc(desc);
+//
+//                                myUser.signUp(new SaveListener<User>() {
+//                                    @Override
+//                                    public void done(User myUser, BmobException e) {
+//                                        if (e==null) {
+//                                            Toast.makeText(RegisterActivity.this,"注册成功,请前往邮箱验证！",Toast.LENGTH_SHORT).show();
+//                                            finish();
+//                                        }else{
+//                                            Toast.makeText(RegisterActivity.this,"注册失败!原因："+e.getMessage(),Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//                                    }
+//                                });
 
                             }
 

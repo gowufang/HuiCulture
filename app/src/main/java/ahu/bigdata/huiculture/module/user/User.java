@@ -1,12 +1,11 @@
 package ahu.bigdata.huiculture.module.user;
 
 import ahu.bigdata.huiculture.module.BaseModel;
-import cn.bmob.v3.BmobUser;
 
 /**
  * Created by renzhiqiang on 15/11/20.
  */
-public class User extends BmobUser {
+public class User{
     private int age;
     private boolean sex;
     private String desc;

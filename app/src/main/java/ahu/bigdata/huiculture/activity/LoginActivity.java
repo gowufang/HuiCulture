@@ -13,8 +13,6 @@ import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
 import ahu.bigdata.huiculture.manager.UserManager;
 import ahu.bigdata.huiculture.module.user.User;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by YCH on 2017/10/18.
@@ -81,41 +79,41 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     //发送登陆请求
     private void login() {
 
-        String userName = mUserNameView.getText().toString().trim();
-        String password = mPasswordView.getText().toString().trim();
-//判断是否为空
-        if (!TextUtils.isEmpty(userName)&&!TextUtils.isEmpty(password)) {
-            //登录
-            User myUser = new User();
-            myUser.setUsername(userName);
-            myUser.setPassword(password);
-            myUser.login(new SaveListener<User>() {
-
-                @Override
-                public void done(User myUser, BmobException e) {
-
-                    if (e==null) {
-                        //判断邮箱是否验证
-                        if (myUser.getEmailVerified()){
-
-                            UserManager.getInstance().setUser(myUser);//保存当前用户单例对象
-                            sendLoginBroadcast();
-                            finish();
-                        }
-                        else {
-                            Toast.makeText(LoginActivity.this,"请前往邮箱验证！",Toast.LENGTH_SHORT).show();
-                        }
-
-                    }else {
-
-                        Toast.makeText(LoginActivity.this,"登录失败!原因："+e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-        }else {
-            Toast.makeText(this," 输入框不能为空",Toast.LENGTH_SHORT).show();
-        }
+//        String userName = mUserNameView.getText().toString().trim();
+//        String password = mPasswordView.getText().toString().trim();
+//       //判断是否为空
+//        if (!TextUtils.isEmpty(userName)&&!TextUtils.isEmpty(password)) {
+//            //登录
+//            User myUser = new User();
+//            myUser.setUsername(userName);
+//            myUser.setPassword(password);
+//            myUser.login(new SaveListener<User>() {
+//
+//                @Override
+//                public void done(User myUser, BmobException e) {
+//
+//                    if (e==null) {
+//                        //判断邮箱是否验证
+//                        if (myUser.getEmailVerified()){
+//
+//                            UserManager.getInstance().setUser(myUser);//保存当前用户单例对象
+//                            sendLoginBroadcast();
+//                            finish();
+//                        }
+//                        else {
+//                            Toast.makeText(LoginActivity.this,"请前往邮箱验证！",Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                    }else {
+//
+//                        Toast.makeText(LoginActivity.this,"登录失败!原因："+e.getMessage(),Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//
+//        }else {
+//            Toast.makeText(this," 输入框不能为空",Toast.LENGTH_SHORT).show();
+//        }
 
 //        //用Http给服务器发请求，请求User数据
 //        RequestCenter.login(userName, password, new DisposeDataListener() {

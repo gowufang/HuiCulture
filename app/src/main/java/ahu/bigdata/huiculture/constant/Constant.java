@@ -15,8 +15,6 @@ public class Constant {
     public static final String SHARE_IS_FIRST = "isFrst";
     //Bugly key
     public static final String BUGLY_APP_ID="10bcd16993";
-    //Bmob Key
-    public static final String BMOB_APP_ID = "b2e4c743dbb6608225271faed5eb66d2";
     //微信精选key
     public static final String WECHAT_KEY="e7db9fe647fdfaade42f16f60b90dbaf";
 
