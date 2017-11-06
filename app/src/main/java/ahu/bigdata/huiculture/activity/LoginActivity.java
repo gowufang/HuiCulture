@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.LogInCallback;
+
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
 import ahu.bigdata.huiculture.manager.UserManager;
@@ -39,11 +43,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
     private void initView() {
-        mUserNameView = (EditText) findViewById(R.id.associate_email_input);
-        mPasswordView = (EditText) findViewById(R.id.login_input_password);
-        btn_login = (Button) findViewById (R.id.login_button);
+        mUserNameView =  findViewById(R.id.associate_email_input);
+        mPasswordView =  findViewById(R.id.login_input_password);
+        btn_login =  findViewById (R.id.login_button);
         btn_login.setOnClickListener(this);
-        btn_register = (Button) findViewById(R.id.register_button);
+        btn_register = findViewById(R.id.register_button);
         btn_register.setOnClickListener(this);
 
     }
@@ -79,43 +83,42 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     //发送登陆请求
     private void login() {
 
-//        String userName = mUserNameView.getText().toString().trim();
-//        String password = mPasswordView.getText().toString().trim();
-//       //判断是否为空
-//        if (!TextUtils.isEmpty(userName)&&!TextUtils.isEmpty(password)) {
-//            //登录
-//            User myUser = new User();
-//            myUser.setUsername(userName);
-//            myUser.setPassword(password);
-//            myUser.login(new SaveListener<User>() {
-//
-//                @Override
-//                public void done(User myUser, BmobException e) {
-//
-//                    if (e==null) {
-//                        //判断邮箱是否验证
-//                        if (myUser.getEmailVerified()){
-//
-//                            UserManager.getInstance().setUser(myUser);//保存当前用户单例对象
-//                            sendLoginBroadcast();
-//                            finish();
-//                        }
-//                        else {
-//                            Toast.makeText(LoginActivity.this,"请前往邮箱验证！",Toast.LENGTH_SHORT).show();
-//                        }
-//
-//                    }else {
-//
-//                        Toast.makeText(LoginActivity.this,"登录失败!原因："+e.getMessage(),Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
-//
-//        }else {
-//            Toast.makeText(this," 输入框不能为空",Toast.LENGTH_SHORT).show();
-//        }
+        String username = mUserNameView.getText().toString().trim();
+        String password = mPasswordView.getText().toString().trim();
+       //判断是否为空
+        if (!TextUtils.isEmpty(username)&&!TextUtils.isEmpty(password)) {
+            //登录
+            AVUser.logInInBackground(username, password, new LogInCallback<AVUser>() {
+                @Override
+                public void done(AVUser avUser, AVException e) {
+                    if (e == null) {
+                            UserManager.getInstance().setUser(avUser);//保存当前用户单例对象
+                            sendLoginBroadcast();
+                            finish();
+                    } else {
+                        //为了提高用户友好性，检查常见错误
+                        switch (e.getCode()) {
+                            case 216:
+                                Toast.makeText(LoginActivity.this, "请其前往邮箱验证哦~", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 210:
+                                Toast.makeText(LoginActivity.this, "用户名和密码不匹配！", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 211:
+                                Toast.makeText(LoginActivity.this, "找不到该用户，请先注册。", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                Toast.makeText(LoginActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
 
-//        //用Http给服务器发请求，请求User数据
+                        }
+                    }
+                }
+            });
+        }else {
+            Toast.makeText(this," 输入框不能为空!",Toast.LENGTH_SHORT).show();
+        }
+
+        /*************** 用Http给服务器发请求，请求User数据******************/
 //        RequestCenter.login(userName, password, new DisposeDataListener() {
 //            @Override
 //            public void onSuccess(Object responseObj) {
@@ -139,8 +142,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //            public void onFailure(Object reasonObj) {
 //            }
 //        });
-
-
     }
 
     //向整个应用发送登陆广播事件

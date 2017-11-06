@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
 import com.youdu.adutil.ImageLoaderUtil;
 import com.youdu.okhttp.listener.DisposeDataListener;
 
@@ -55,22 +56,16 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     private TextView mQrCodeView;
     private TextView mUpdateView;
     private CustomDialog dialog;
-    private Button btn_camera;
-    private Button btn_picture;
+    private Button btn_exit;
     private Button btn_cancel;
     private CircleImageView mUserPhotoView;
 
     /**
      * data
      */
-    public static final String PHOTO_IMAGE_FILE_NAME = "fileImg.jpg";
-    public static final int CAMERA_REQUEST_CODE = 100;
-    public static final int IMAGE_REQUEST_CODE = 101;
-    public static final int RESULT_REQUEST_CODE = 102;
-    private File tempFile = null;
-
     //自定义了一个广播接收器
     private LoginBroadcastReceiver receiver = new LoginBroadcastReceiver();
+
 
     public PersonFragment() {
     }
@@ -119,17 +114,13 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                 R.layout.dialog_photo, R.style.pop_anim_style, Gravity.BOTTOM, 0);
         //提示框以外点击无效
         dialog.setCancelable(false);
-        btn_camera = (Button) dialog.findViewById(R.id.btn_camera);
-        btn_camera.setOnClickListener(this);
-        btn_picture = (Button) dialog.findViewById(R.id.btn_picture);
-        btn_picture.setOnClickListener(this);
+        btn_exit = (Button) dialog.findViewById(R.id.btn_exit);
+        btn_exit.setOnClickListener(this);
         btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
         btn_cancel.setOnClickListener(this);
 
 
     }
-
-
     @Override
     public void onResume() {
         super.onResume();
@@ -138,12 +129,11 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
             if (mLoginedLayout.getVisibility() == View.GONE) {
                 mLoginLayout.setVisibility(View.GONE);
                 mLoginedLayout.setVisibility(View.VISIBLE);
-//                mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
-//                mTickView.setText(UserManager.getInstance().getUser().getEmail());
+                mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
+                mTickView.setText(UserManager.getInstance().getUser().getEmail());
             }
         }
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -168,7 +158,6 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                     toLogin();
                 } else {
                     //已登陆根据用户ID生成二维码显示
-
                 }
                 break;
             case R.id.video_setting_view:
@@ -181,85 +170,20 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                     requestPermission(Constant.WRITE_READ_EXTERNAL_CODE, Constant.WRITE_READ_EXTERNAL_PERMISSION);
                 }
                 break;
-
             case R.id.user_photo_view:
                 dialog.show();
                 break;
+            case R.id.btn_exit:
+                AVUser.logOut();// 清除缓存用户对象
+                UserManager.getInstance().removeUser();
+                AVUser currentUser = AVUser.getCurrentUser();// 现在的 currentUser 是 null 了
+                dialog.dismiss();
+                break;
             case R.id.btn_cancel:
                 dialog.dismiss();
-            case R.id.btn_camera:
-                toCamera();
                 break;
-            case R.id.btn_picture:
-                toPicture();
-                break;   
-        }
-    }
 
-    //跳转相机
-    private void toCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //判断内存卡是否可用，可用的话就进行储存
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                Uri.fromFile(new File(Environment.getExternalStorageDirectory(), PHOTO_IMAGE_FILE_NAME)));
-        startActivityForResult(intent, CAMERA_REQUEST_CODE);
-        dialog.dismiss();
-    }
-
-    //跳转相册
-    private void toPicture() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, IMAGE_REQUEST_CODE);
-        dialog.dismiss();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != getActivity().RESULT_CANCELED) {
-            switch (requestCode) {
-                //相册数据
-                case IMAGE_REQUEST_CODE:
-                    startPhotoZoom(data.getData());
-                    break;
-                //相机数据
-                case CAMERA_REQUEST_CODE:
-                    tempFile = new File(Environment.getExternalStorageDirectory(), PHOTO_IMAGE_FILE_NAME);
-                    startPhotoZoom(Uri.fromFile(tempFile));
-                    break;
-                case RESULT_REQUEST_CODE:
-                    //有可能点击舍弃
-                    if (data != null) {
-                        //拿到图片设置
-                        setImageToView(data);
-                        //既然已经设置了图片，我们原先的就应该删除
-                        if (tempFile != null) {
-                            tempFile.delete();
-                        }
-                    }
-                    break;
-            }
         }
-    }
-    //裁剪
-    private void startPhotoZoom(Uri uri) {
-        if (uri == null) {
-            L.e("uri == null");
-            return;
-        }
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        //设置裁剪
-        intent.putExtra("crop", "true");
-        //裁剪宽高比例
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        //裁剪图片的质量
-        intent.putExtra("outputX", 320);
-        intent.putExtra("outputY", 320);
-        //发送数据
-        intent.putExtra("return-data", true);
-        startActivityForResult(intent, RESULT_REQUEST_CODE);
     }
 
     /**
@@ -309,11 +233,17 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                 if (mLoginedLayout.getVisibility() == View.GONE) {
                     mLoginLayout.setVisibility(View.GONE);
                     mLoginedLayout.setVisibility(View.VISIBLE);
-//                    mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
-//                    mTickView.setText(UserManager.getInstance().getUser().getEmail());
-//                    mPhotoView.setImageResource(R.drawable.profile);
+                    mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
+                    mTickView.setText(UserManager.getInstance().getUser().getEmail());
+                    mPhotoView.setImageResource(R.drawable.profile);
 //                    ImageLoaderUtil.getInstance(mContext).displayImage(mPhotoView,R.drawable.profile);
                 }
+            } else {
+                mLoginedLayout.setVisibility(View.GONE);
+                mUserNameView.setVisibility(View.GONE);
+                mTickView.setVisibility(View.GONE);
+                mPhotoView.setImageResource(R.drawable.profile);
+                mLoginedLayout.setVisibility(View.VISIBLE);
             }
         }
     }

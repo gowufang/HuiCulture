@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import ahu.bigdata.huiculture.constant.Constant;
@@ -25,6 +26,9 @@ public class BaseApplication extends Application {
 
         //初始化Bugly
         CrashReport.initCrashReport(getApplicationContext(), Constant.BUGLY_APP_ID,true);
+
+        // 初始化LearnCloud
+        AVOSCloud.initialize(getApplicationContext(),Constant.APP_ID,Constant.APP_KEY);
     }
 
 }

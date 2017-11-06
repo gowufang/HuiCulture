@@ -1,6 +1,6 @@
 package ahu.bigdata.huiculture.manager;
 
-import ahu.bigdata.huiculture.module.user.User;
+import com.avos.avoscloud.AVUser;
 
 /**
  * Created by YCH on 2017/10/18.
@@ -9,7 +9,7 @@ import ahu.bigdata.huiculture.module.user.User;
 public class UserManager {
 
     private static UserManager userManager = null;
-    private User user = null;
+    private AVUser user = null;
 
     public static UserManager getInstance() {
 
@@ -34,7 +34,7 @@ public class UserManager {
      *
      * @param user
      */
-    public void setUser(User user) {
+    public void setUser(AVUser user) {
 
         this.user = user;
     }
@@ -49,7 +49,7 @@ public class UserManager {
      *
      * @return
      */
-    public User getUser() {
+    public AVUser getUser() {
 
         return this.user;
     }

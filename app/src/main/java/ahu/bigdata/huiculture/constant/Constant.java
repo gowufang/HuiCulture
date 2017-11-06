@@ -15,9 +15,9 @@ public class Constant {
     public static final String SHARE_IS_FIRST = "isFrst";
     //Bugly key
     public static final String BUGLY_APP_ID="10bcd16993";
-    //微信精选key
-    public static final String WECHAT_KEY="e7db9fe647fdfaade42f16f60b90dbaf";
-
+    //LearnCloud App key&App id
+    public static final String APP_KEY="agixc4EHNJHYY8WMsaM1cU7H";
+    public static final String APP_ID="QF2c4AOAJULeG773Gl4MJfMQ-gzGzoHsz";
 
     /**
      * 权限常量相关
@@ -41,7 +41,6 @@ public class Constant {
     public static  final int logoCount=12;
     //Cloud页面圆形图片加载地址
     public static final String[] LogoImgUrl = new String[]{
-
             "http://hz.cnwangjie.com/static/%E5%BE%BD%E5%95%86.jpg", "http://hz.cnwangjie.com/static/%E5%BE%BD%E5%B7%9E%E5%AE%97%E6%97%8F.jpg",
             "http://hz.cnwangjie.com/static/%E6%96%B0%E5%AE%89%E7%90%86%E5%AD%A6.jpg", "http://hz.cnwangjie.com/static/%E6%96%B0%E5%AE%89%E5%8C%BB%E5%AD%A6.jpg",
             "http://hz.cnwangjie.com/static/%E6%96%B0%E5%AE%89%E7%94%BB%E6%B4%BE.jpg", "http://hz.cnwangjie.com/static/%E5%BE%BD%E5%B7%9E%E6%96%87%E4%B9%A6.jpg",

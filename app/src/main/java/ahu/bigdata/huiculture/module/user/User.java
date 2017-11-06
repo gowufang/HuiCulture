@@ -1,5 +1,7 @@
 package ahu.bigdata.huiculture.module.user;
 
+import com.avos.avoscloud.AVUser;
+
 import ahu.bigdata.huiculture.module.BaseModel;
 
 /**

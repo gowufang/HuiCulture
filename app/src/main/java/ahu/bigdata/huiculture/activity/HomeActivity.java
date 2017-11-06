@@ -7,10 +7,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.SaveCallback;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import ahu.bigdata.huiculture.R;
@@ -81,7 +85,6 @@ public class HomeActivity extends BaseActivity {
                 @Override
                 public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                     if (scrollY<0) {
-
                         navigation.setVisibility(View.GONE);
                     }
                 }
