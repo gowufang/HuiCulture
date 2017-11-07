@@ -4,7 +4,6 @@
     android:background="@color/white"
     android:orientation="vertical"
     >
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,6 +44,7 @@
             android:textColor="@color/colorGray"
             android:textSize="16sp" />
     </RelativeLayout>
+
     <!--加载图片的LoadingImage-->
     <ImageView
         android:id="@+id/loading_view"

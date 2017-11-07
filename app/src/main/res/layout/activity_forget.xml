@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,54 +9,17 @@
     android:background="@color/Background">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="修改密码"
-        android:textColorHint="@color/black"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp"/>
-
-    <EditText
-        android:id="@+id/et_now"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_333333"
-        android:textColorHint="@color/colorGray"
-        android:hint="旧密码"/>
-
-    <EditText
-        android:id="@+id/et_new"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_333333"
-        android:textColorHint="@color/colorGray"
-        android:hint="新密码"/>
-
-    <EditText
-        android:id="@+id/et_new_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_333333"
-        android:textColorHint="@color/colorGray"
-        android:hint="在此输入密码"/>
-
-    <Button
-        android:id="@+id/btn_update_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_bg"
-        android:text="修改密码"
-        android:textColor="@android:color/white"/>
-
-    <TextView
+        android:id="@+id/forget_title"
         android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="@bool/default_circle_indicator_centered"
         android:text="忘记密码"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"/>
 
     <EditText
+        android:layout_below="@+id/forget_title"
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,12 +28,39 @@
         android:textColorHint="@color/colorGray"/>
 
     <Button
+        android:layout_below="@id/et_email"
         android:id="@+id/btn_forget_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
         android:text="重置"
         android:textColor="@android:color/white"/>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_cccccc"
+    />
 
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn_forget_password"
+        android:layout_marginTop="23dp"
+        android:text="@string/forget_hint"
+        android:textColor="@color/red" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/hint"
+        android:layout_marginTop="18dp"
+        android:text="@string/reset_password_hint"
+        android:textColor="@color/red" />
+</RelativeLayout>

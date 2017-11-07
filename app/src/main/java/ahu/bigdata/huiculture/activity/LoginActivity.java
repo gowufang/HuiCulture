@@ -8,7 +8,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
@@ -19,6 +21,7 @@ import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
 import ahu.bigdata.huiculture.manager.UserManager;
 import ahu.bigdata.huiculture.module.user.User;
+import ahu.bigdata.huiculture.utils.ShareUtils;
 
 /**
  * Created by YCH on 2017/10/18.
@@ -35,6 +38,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText mPasswordView;
     private Button btn_register;
     private Button btn_login;
+    private CheckBox keep_password;
+    private TextView tv_forget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         btn_login.setOnClickListener(this);
         btn_register = findViewById(R.id.register_button);
         btn_register.setOnClickListener(this);
+        keep_password = findViewById(R.id.keep_password);
+        //屏幕外点击无效
+        keep_password = (CheckBox) findViewById(R.id.keep_password);
+        //设置选中的状态
+        Boolean isChecked= ShareUtils.getBoolean(this, "keeppass", false);/*默认不勾选*/
+        keep_password.setChecked(isChecked);
+        if (isChecked) {
+            //设置显示在界面的用户名、密码
+            mUserNameView.setText(ShareUtils.getString(this,"name",""));//默认空串
+            mPasswordView.setText(ShareUtils.getString(this,"password",""));
+        }
+        tv_forget = findViewById(R.id.tv_forget);
+        tv_forget.setOnClickListener(this);
     }
 
     @Override
@@ -63,10 +81,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.register_button:
                 toRegister();
                 break;
-            case R.id.iv_login_logo:
+            case R.id.tv_forget:
+                toForget();
                 break;
-
         }
+    }
+
+    private void toForget() {
+        startActivity(new Intent(this,ForgetActivity.class));
     }
 
     private void toRegister() {
@@ -131,6 +153,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (view != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //保存状态
+        ShareUtils.putBoolean(this,"keeppass",keep_password.isChecked());
+
+        //是否记住密码
+        if (keep_password.isChecked()) {
+            //记住用户名和密码
+            ShareUtils.putString(this,"name",mUserNameView.getText().toString().trim());
+            ShareUtils.putString(this,"password",mPasswordView.getText().toString().trim());
+        }else {
+
+            ShareUtils.delShar(this,"name");
+            ShareUtils.delShar(this,"password");
+
         }
     }
 }

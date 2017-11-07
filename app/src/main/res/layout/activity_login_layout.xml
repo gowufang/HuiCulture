@@ -97,6 +97,7 @@
                 android:paddingRight="15dp"
                 >
                 <CheckBox
+                    android:id="@+id/keep_password"
                     android:textColor="@color/colorGray"
                     android:text="@string/remember_password"
                     android:layout_width="wrap_content"
@@ -114,6 +115,7 @@
                 android:paddingTop="10dp"
                 >
                 <TextView
+                    android:id="@+id/tv_forget"
                     android:textColor="@color/colorGray"
                     android:text="@string/forget_password"
                     android:layout_width="wrap_content"

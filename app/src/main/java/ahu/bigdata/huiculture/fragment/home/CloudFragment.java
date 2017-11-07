@@ -75,7 +75,7 @@ public class CloudFragment extends BaseFragment implements AdapterView.OnItemCli
         //设置中间小圆从白色到黑色
         mWaveSwipeRefreshLayout.setColorSchemeColors(Color.WHITE, Color.BLACK);
         //设置整体的颜色
-        mWaveSwipeRefreshLayout.setWaveColor(Color.argb(100, 110, 110, 110));
+        mWaveSwipeRefreshLayout.setWaveColor(Color.argb(100, 0, 0, 0));
         mWaveSwipeRefreshLayout.setOnRefreshListener(this);
 
         mGridView = (GridView) mContentView.findViewById(R.id.mGridView);
@@ -99,6 +99,7 @@ public class CloudFragment extends BaseFragment implements AdapterView.OnItemCli
 
         @Override
         protected String[] doInBackground(Void... voids) {
+            initData();
             return new String[0];
         }
 

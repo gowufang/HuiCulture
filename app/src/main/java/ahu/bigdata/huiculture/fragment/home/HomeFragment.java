@@ -72,7 +72,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onSuccess(Object responseObj) {
                 //完成真正逻辑
-//                L.e(L.TAG+"------Success:------"+responseObj.toString());
                 /**
                  *获取数据，更新UI
                  */
@@ -211,4 +210,5 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 break;
         }
     }
+
 }

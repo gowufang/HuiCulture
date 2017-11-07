@@ -7,6 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.RequestPasswordResetCallback;
+
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.base.BaseActivity;
 
@@ -16,13 +20,9 @@ import ahu.bigdata.huiculture.activity.base.BaseActivity;
  */
 public class ForgetActivity extends BaseActivity implements View.OnClickListener {
 
-
-    private EditText et_now;
-    private EditText et_new;
-    private EditText et_new_password;
-    private Button btn_update_password;
-
-
+    /**
+     * UI
+     */
     private Button btn_forget_password;
     private EditText et_email;
 
@@ -34,16 +34,9 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initView() {
-
         btn_forget_password = (Button) findViewById(R.id.btn_forget_password);
         btn_forget_password.setOnClickListener(this);
-
-        et_now = (EditText) findViewById(R.id.et_now);
-        et_new = (EditText) findViewById(R.id.et_new);
-        et_new_password = (EditText) findViewById(R.id. et_new_password);
-        btn_update_password = (Button) findViewById(R.id.btn_update_password);
-
-        btn_update_password.setOnClickListener(this);
+        et_email = findViewById(R.id.et_email);
     }
 
     @Override
@@ -58,63 +51,24 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
                 //2.判断是否为空
                 if (!TextUtils.isEmpty(email)) {
 //                    //3.发送邮件
-//                    MyUser.resetPasswordByEmail(email, new UpdateListener() {
-//                        @Override
-//                        public void done(BmobException e) {
-//                            if (e==null) {
-//
-//                                Toast.makeText(ForgetActivity.this, "邮箱已发送至"+email, Toast.LENGTH_SHORT).show();
-//                                finish();
-//                            }
-//                            else {
-//
-//                                Toast.makeText(ForgetActivity.this, "邮箱发送失败", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
+                    AVUser.requestPasswordResetInBackground(email, new RequestPasswordResetCallback() {
+                        @Override
+                        public void done(AVException e) {
+                            if (e == null) {
+                                Toast.makeText(ForgetActivity.this, "发送邮件成功！请注意查收~", Toast.LENGTH_SHORT).show();
+                            } else {
+                                e.printStackTrace();
+                                Toast.makeText(ForgetActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }else{
 
-
-                }
-                break;
-            case R.id.btn_update_password:
-                //获取输入框的值
-                String now = et_now.getText().toString().trim();
-                String news = et_new.getText().toString().trim();
-                String new_password = et_new_password.getText().toString().trim();
-                //判断是否为空
-                if (!TextUtils.isEmpty(now)&&!TextUtils.isEmpty(news)&&!TextUtils.isEmpty(new_password)) {
-
-                    //判断两次输入的密码是否一致
-                    if (news.equals(new_password)) {
-//                        //重置密码
-//                        MyUser.updateCurrentUserPassword(now, news, new UpdateListener() {
-//                            @Override
-//                            public void done(BmobException e) {
-//                                if (e==null) {
-//
-//                                    Toast.makeText(ForgetActivity.this, "重置密码成功", Toast.LENGTH_SHORT).show();
-//                                    finish();//回到LoginActivity
-//                                }else {
-//
-//                                    Toast.makeText(ForgetActivity.this, "重置密码失败", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        });
-                    }else {
-
-                        Toast.makeText(this, "两次输入的密码不一致", Toast.LENGTH_SHORT).show();
-                    }
-
-                }else {
-                    Toast.makeText(this, "两次输入的密码不能为空 ", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(this, "输入的邮箱不能为空！", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
     }
-
-
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
