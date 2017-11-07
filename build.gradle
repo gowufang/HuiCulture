@@ -7,6 +7,7 @@ buildscript {
         maven {
             url "http://mvn.leancloud.cn/nexus/content/repositories/public"
         }
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
@@ -21,6 +22,10 @@ allprojects {
         //这里是 LeanCloud 的包仓库
         maven {
             url "http://mvn.leancloud.cn/nexus/content/repositories/public"
+        }
+        //WaveSwipeRefreshLayout
+        maven {
+            url "https://jitpack.io"
         }
 
     }

@@ -68,6 +68,8 @@ dependencies {
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
     // LeanCloud 基础包
     compile ('cn.leancloud.android:avoscloud-sdk:v4.4.4')
+    //WaveSwipeRefreshLayout
+    compile 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
 }
 
 repositories {

@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white">
+
+    <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_swipe">
     <GridView
         android:id="@+id/mGridView"
         android:layout_width="match_parent"
@@ -17,4 +22,5 @@
         android:verticalSpacing="10dp"
         >
     </GridView>
+    </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
 </LinearLayout>
