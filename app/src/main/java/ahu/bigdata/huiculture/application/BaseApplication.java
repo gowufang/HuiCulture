@@ -3,7 +3,6 @@ package ahu.bigdata.huiculture.application;
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -29,6 +28,7 @@ public class BaseApplication extends Application {
 
         // 初始化LearnCloud
         AVOSCloud.initialize(getApplicationContext(),Constant.APP_ID,Constant.APP_KEY);
+
     }
 
 }

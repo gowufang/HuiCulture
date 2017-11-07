@@ -49,7 +49,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private TextView mCategoryView;
     private ImageView mLoadingView;
     private ListView mListView;
-
     /**
      * data
      */
@@ -65,6 +64,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         super.onCreate(savedInstanceState);
         requestRecommandData();
     }
+
+
     //发送推荐产品的请求
     private void requestRecommandData() {
 
