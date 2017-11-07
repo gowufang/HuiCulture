@@ -5,10 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,17 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVUser;
-import com.youdu.adutil.ImageLoaderUtil;
-import com.youdu.okhttp.listener.DisposeDataListener;
-
-import java.io.File;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.LoginActivity;
 import ahu.bigdata.huiculture.constant.Constant;
 import ahu.bigdata.huiculture.fragment.BaseFragment;
 import ahu.bigdata.huiculture.manager.UserManager;
-import ahu.bigdata.huiculture.utils.L;
 import ahu.bigdata.huiculture.utils.Util;
 import ahu.bigdata.huiculture.view.dialog.CustomDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -176,7 +168,11 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
             case R.id.btn_exit:
                 AVUser.logOut();// 清除缓存用户对象
                 UserManager.getInstance().removeUser();
-                AVUser currentUser = AVUser.getCurrentUser();// 现在的 currentUser 是 null 了
+                //更新UI
+                mLoginedLayout.setVisibility(View.GONE);
+                mLoginLayout.setVisibility(View.VISIBLE);
+                AVUser currentUser = AVUser.getCurrentUser();//null
+                mUserNameView.requestFocus();
                 dialog.dismiss();
                 break;
             case R.id.btn_cancel:
@@ -206,14 +202,6 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         LocalBroadcastManager.getInstance(mContext).unregisterReceiver(receiver);
     }
 
-    //设置图片
-    private void setImageToView(Intent data) {
-        Bundle bundle = data.getExtras();
-        if (bundle != null) {
-            Bitmap bitmap = bundle.getParcelable("data");
-            mUserPhotoView.setImageBitmap(bitmap);
-        }
-    }
 
     @Override
     public void onDestroyView() {
@@ -235,17 +223,21 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                     mLoginedLayout.setVisibility(View.VISIBLE);
                     mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
                     mTickView.setText(UserManager.getInstance().getUser().getEmail());
-                    mPhotoView.setImageResource(R.drawable.profile);
-//                    ImageLoaderUtil.getInstance(mContext).displayImage(mPhotoView,R.drawable.profile);
+                    //默认显示本地头像
+                    mUserPhotoView.setImageResource(R.drawable.logined_profile);
+                    //加载服务器上的头像
+//                  ImageLoaderUtil.getInstance(mContext).displayImage( UserManager.getInstance().getUser().data.photoUrl);
                 }
-            } else {
-                mLoginedLayout.setVisibility(View.GONE);
-                mUserNameView.setVisibility(View.GONE);
-                mTickView.setVisibility(View.GONE);
-                mPhotoView.setImageResource(R.drawable.profile);
-                mLoginedLayout.setVisibility(View.VISIBLE);
             }
         }
     }
 
+    //设置图片
+    private void setImageToView(Intent data) {
+        Bundle bundle = data.getExtras();
+        if (bundle != null) {
+            Bitmap bitmap = bundle.getParcelable("data");
+            mUserPhotoView.setImageBitmap(bitmap);
+        }
+    }
 }

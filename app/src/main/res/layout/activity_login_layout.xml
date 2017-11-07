@@ -19,12 +19,13 @@
                 android:id="@+id/iv_login_logo"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="61dp"
                 android:background="@mipmap/ic_launcher_round"
                 android:paddingLeft="43dp"
                 android:paddingRight="47dp"
-                android:paddingTop="47dp"/>
+                android:paddingTop="47dp" />
 
             <RelativeLayout
                 android:id="@+id/rl_login_input"

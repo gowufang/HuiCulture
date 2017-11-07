@@ -13,7 +13,6 @@
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
     >
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/photo_view"
             android:layout_width="80dp"
@@ -60,7 +59,6 @@
         android:paddingBottom="15dp"
         android:visibility="gone"
     >
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_photo_view"
             android:layout_width="80dp"
@@ -84,6 +82,7 @@
                 android:text="tyt114"
                 android:textColor="@color/color_333333"
                 android:textSize="16sp"
+                android:focusableInTouchMode="true"
             />
             <TextView
                 android:id="@+id/tick_view"

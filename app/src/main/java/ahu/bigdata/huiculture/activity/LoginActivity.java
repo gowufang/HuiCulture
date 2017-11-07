@@ -1,10 +1,12 @@
 package ahu.bigdata.huiculture.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -49,7 +51,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         btn_login.setOnClickListener(this);
         btn_register = findViewById(R.id.register_button);
         btn_register.setOnClickListener(this);
-
     }
 
     @Override
@@ -69,7 +70,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void toRegister() {
-
         startActivity(new Intent(this,RegisterActivity.class));
     }
 
@@ -94,6 +94,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     if (e == null) {
                             UserManager.getInstance().setUser(avUser);//保存当前用户单例对象
                             sendLoginBroadcast();
+                            //关闭软键盘
+                            closeKeyboard();
                             finish();
                     } else {
                         //为了提高用户友好性，检查常见错误
@@ -117,35 +119,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }else {
             Toast.makeText(this," 输入框不能为空!",Toast.LENGTH_SHORT).show();
         }
-
-        /*************** 用Http给服务器发请求，请求User数据******************/
-//        RequestCenter.login(userName, password, new DisposeDataListener() {
-//            @Override
-//            public void onSuccess(Object responseObj) {
-//                /**
-//                 * 这部分可以封装起来，封装为到一个登陆流程类中
-//                 */
-//                User user = (User) responseObj;
-//                UserManager.getInstance().setUser(user);//保存当前用户单例对象
-////                connectToSever();
-//                sendLoginBroadcast();
-//                /**
-//                 * 还应该将用户信息存入数据库，这样可以保证用户打开应用后总是登陆状态
-//                 * 只有用户手动退出登陆时候，将用户数据从数据库中删除。
-//                 */
-//                insertUserInfoIntoDB();
-//
-//                finish();//销毁当前登陆页面
-//            }
-//
-//            @Override
-//            public void onFailure(Object reasonObj) {
-//            }
-//        });
     }
 
     //向整个应用发送登陆广播事件
     private void sendLoginBroadcast() {
         LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(LOGIN_ACTION));
+    }
+    //关闭软键盘
+    private void closeKeyboard() {
+        View view = getWindow().peekDecorView();
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
