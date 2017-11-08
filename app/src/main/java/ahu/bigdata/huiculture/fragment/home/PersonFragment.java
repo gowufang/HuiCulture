@@ -4,23 +4,26 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.content.LocalBroadcastManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.youdu.adutil.ImageLoaderUtil;
-import com.youdu.okhttp.listener.DisposeDataListener;
+import com.avos.avoscloud.AVUser;
 
 import ahu.bigdata.huiculture.R;
 import ahu.bigdata.huiculture.activity.LoginActivity;
 import ahu.bigdata.huiculture.constant.Constant;
 import ahu.bigdata.huiculture.fragment.BaseFragment;
 import ahu.bigdata.huiculture.manager.UserManager;
+import ahu.bigdata.huiculture.utils.Util;
+import ahu.bigdata.huiculture.view.dialog.CustomDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -44,10 +47,17 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     private TextView mShareView;
     private TextView mQrCodeView;
     private TextView mUpdateView;
+    private CustomDialog dialog;
+    private Button btn_exit;
+    private Button btn_cancel;
+    private CircleImageView mUserPhotoView;
 
-
+    /**
+     * data
+     */
     //自定义了一个广播接收器
     private LoginBroadcastReceiver receiver = new LoginBroadcastReceiver();
+
 
     public PersonFragment() {
     }
@@ -85,13 +95,24 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mLoginInfoView = (TextView) mContentView.findViewById(R.id.login_info_view);
         mUserNameView = (TextView) mContentView.findViewById(R.id.username_view);
         mTickView = (TextView) mContentView.findViewById(R.id.tick_view);
-
         mUpdateView = (TextView) mContentView.findViewById(R.id.update_view);
         mUpdateView.setOnClickListener(this);
 
+        mUserPhotoView = (CircleImageView) mContentView.findViewById(R.id.user_photo_view);
+        mUserPhotoView.setOnClickListener(this);
+
+        //初始化dialog
+        dialog = new CustomDialog(getActivity(), 0, 0,
+                R.layout.dialog_photo, R.style.pop_anim_style, Gravity.BOTTOM, 0);
+        //提示框以外点击无效
+        dialog.setCancelable(false);
+        btn_exit = (Button) dialog.findViewById(R.id.btn_exit);
+        btn_exit.setOnClickListener(this);
+        btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(this);
+
+
     }
-
-
     @Override
     public void onResume() {
         super.onResume();
@@ -100,12 +121,11 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
             if (mLoginedLayout.getVisibility() == View.GONE) {
                 mLoginLayout.setVisibility(View.GONE);
                 mLoginedLayout.setVisibility(View.VISIBLE);
-                mUserNameView.setText(UserManager.getInstance().getUser().data.name);
-                mTickView.setText(UserManager.getInstance().getUser().data.tick);
+                mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
+                mTickView.setText(UserManager.getInstance().getUser().getEmail());
             }
         }
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -130,7 +150,6 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                     toLogin();
                 } else {
                     //已登陆根据用户ID生成二维码显示
-
                 }
                 break;
             case R.id.video_setting_view:
@@ -143,10 +162,25 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                     requestPermission(Constant.WRITE_READ_EXTERNAL_CODE, Constant.WRITE_READ_EXTERNAL_PERMISSION);
                 }
                 break;
+            case R.id.user_photo_view:
+                dialog.show();
+                break;
+            case R.id.btn_exit:
+                AVUser.logOut();// 清除缓存用户对象
+                UserManager.getInstance().removeUser();
+                //更新UI
+                mLoginedLayout.setVisibility(View.GONE);
+                mLoginLayout.setVisibility(View.VISIBLE);
+                AVUser currentUser = AVUser.getCurrentUser();//null
+                mUserNameView.requestFocus();
+                dialog.dismiss();
+                break;
+            case R.id.btn_cancel:
+                dialog.dismiss();
+                break;
+
         }
     }
-
-
 
     /**
      * 去登陆页面
@@ -169,6 +203,13 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     }
 
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        //保存
+        Util.putImageToShare(getActivity(),mUserPhotoView);
+    }
+
     /**
      * 接收mina发送来的消息，并更新UI
      */
@@ -180,11 +221,23 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                 if (mLoginedLayout.getVisibility() == View.GONE) {
                     mLoginLayout.setVisibility(View.GONE);
                     mLoginedLayout.setVisibility(View.VISIBLE);
-                    mUserNameView.setText(UserManager.getInstance().getUser().data.name);
-                    mTickView.setText(UserManager.getInstance().getUser().data.tick);
-                    ImageLoaderUtil.getInstance(mContext).displayImage(mPhotoView, UserManager.getInstance().getUser().data.photoUrl);
+                    mUserNameView.setText(UserManager.getInstance().getUser().getUsername());
+                    mTickView.setText(UserManager.getInstance().getUser().getEmail());
+                    //默认显示本地头像
+                    mUserPhotoView.setImageResource(R.drawable.logined_profile);
+                    //加载服务器上的头像
+//                  ImageLoaderUtil.getInstance(mContext).displayImage( UserManager.getInstance().getUser().data.photoUrl);
                 }
             }
+        }
+    }
+
+    //设置图片
+    private void setImageToView(Intent data) {
+        Bundle bundle = data.getExtras();
+        if (bundle != null) {
+            Bitmap bitmap = bundle.getParcelable("data");
+            mUserPhotoView.setImageBitmap(bitmap);
         }
     }
 }

@@ -3,11 +3,13 @@
                 android:layout_height="match_parent"
                 android:background="@color/Background"
               >
-
     <ScrollView
         android:id="@+id/login_scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -15,14 +17,15 @@
 
             <ImageView
                 android:id="@+id/iv_login_logo"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="60dp"
-                android:background="@drawable/logo"
+                android:layout_marginTop="61dp"
+                android:background="@mipmap/ic_launcher_round"
                 android:paddingLeft="43dp"
                 android:paddingRight="47dp"
-                android:paddingTop="70dp"/>
+                android:paddingTop="47dp" />
 
             <RelativeLayout
                 android:id="@+id/rl_login_input"
@@ -32,29 +35,16 @@
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp">
 
-                <!--<com.youdu.view.associatemail.MailBoxAssociateView-->
-                    <!--android:id="@+id/associate_email_input"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginTop="57dp"-->
-                    <!--android:hint="@string/account"-->
-                    <!--android:paddingBottom="12dp"-->
-                    <!--android:paddingLeft="5dp"-->
-                    <!--android:popupBackground="@drawable/bg_recommend_mail_list"-->
-                    <!--android:singleLine="true"-->
-                    <!--android:textColor="@color/color_333333"-->
-                    <!--android:textColorHint="@color/color_bfbfbf"-->
-                    <!--android:textSize="16sp"/>-->
                 <EditText
                 android:id="@+id/associate_email_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="57dp"
+                android:layout_marginTop="47dp"
                 android:hint="@string/account"
                 android:paddingBottom="12dp"
                 android:paddingLeft="5dp"
                 android:popupBackground="@drawable/bg_recommend_mail_list"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textColor="@color/color_333333"
                 android:textColorHint="@color/colorGray"
                 android:textSize="16sp"/>
@@ -75,7 +65,7 @@
                     android:textSize="16sp"/>
             </RelativeLayout>
 
-            <TextView
+            <Button
                 android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -83,10 +73,59 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="50dp"
-                android:background="@color/color_d0d0d0"
+                android:background="@drawable/button_bg"
                 android:gravity="center"
                 android:text="@string/login"
-                android:textColor="@color/black"/>
+                android:textColor="@color/white"/>
+            <Button
+                android:id="@+id/register_button"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@id/login_button"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_bg"
+                android:gravity="center"
+                android:text="@string/register"
+                android:textColor="@color/white"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_login_input"
+                android:gravity="right"
+                android:paddingRight="15dp"
+                >
+                <CheckBox
+                    android:id="@+id/keep_password"
+                    android:textColor="@color/colorGray"
+                    android:text="@string/remember_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/register_button"
+                android:gravity="right"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                >
+                <TextView
+                    android:id="@+id/tv_forget"
+                    android:textColor="@color/colorGray"
+                    android:text="@string/forget_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
         </RelativeLayout>
+
     </ScrollView>
 </RelativeLayout>

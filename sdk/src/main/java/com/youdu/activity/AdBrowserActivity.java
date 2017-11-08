@@ -152,11 +152,7 @@ public final class  AdBrowserActivity extends Activity {
 
     @SuppressLint("NewApi")
     private void setImage(Button button, String imageString) {
-        if (Build.VERSION.SDK_INT < 16) {
-            button.setBackgroundDrawable(Utils.decodeImage(imageString));
-        } else {
-            button.setBackground(Utils.decodeImage(imageString));
-        }
+        button.setBackground(Utils.decodeImage(imageString));
     }
 
     private void initButtonListeners(final WebView webView) {

@@ -13,9 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kymjs.rxvolley.RxVolley;
-import com.kymjs.rxvolley.client.HttpCallback;
-import com.kymjs.rxvolley.client.HttpParams;
 import com.youdu.activity.AdBrowserActivity;
 import com.youdu.okhttp.listener.DisposeDataListener;
 
@@ -31,7 +28,6 @@ import ahu.bigdata.huiculture.fragment.BaseFragment;
 import ahu.bigdata.huiculture.module.recommand.BaseRecommandModel;
 import ahu.bigdata.huiculture.module.recommand.RecommandBodyValue;
 import ahu.bigdata.huiculture.module.recommand.VideoModule;
-import ahu.bigdata.huiculture.network.http.HttpConstants;
 import ahu.bigdata.huiculture.network.http.RequestCenter;
 import ahu.bigdata.huiculture.utils.L;
 import ahu.bigdata.huiculture.view.home.HomeHeaderLayout;
@@ -53,7 +49,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private TextView mCategoryView;
     private ImageView mLoadingView;
     private ListView mListView;
-
     /**
      * data
      */
@@ -69,6 +64,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         super.onCreate(savedInstanceState);
         requestRecommandData();
     }
+
+
     //发送推荐产品的请求
     private void requestRecommandData() {
 
@@ -76,7 +73,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onSuccess(Object responseObj) {
                 //完成真正逻辑
-//                L.e(L.TAG+"------Success:------"+responseObj.toString());
                 /**
                  *获取数据，更新UI
                  */
@@ -133,7 +129,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
      */
     private void showErrorView() {
 
-
     }
 
     @Override
@@ -163,8 +158,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         mListView.setOnItemClickListener(this);
 
     }
-
-
 
     @Override
     public void onClick(View v) {
@@ -218,4 +211,5 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 break;
         }
     }
+
 }

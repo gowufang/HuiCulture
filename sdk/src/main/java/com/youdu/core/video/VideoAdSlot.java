@@ -46,6 +46,7 @@ public class VideoAdSlot implements ADVideoPlayerListener {
         mParentView = slotLitener.getAdParent();
         mContext = mParentView.getContext();
         initVideoView(frameLoadListener);
+
     }
 
     private void initVideoView(ADFrameImageLoadListener frameImageLoadListener) {
@@ -56,6 +57,7 @@ public class VideoAdSlot implements ADVideoPlayerListener {
             mVideoView.setFrameLoadListener(frameImageLoadListener);
             mVideoView.setListener(this);
         }
+
         RelativeLayout paddingView = new RelativeLayout(mContext);
         paddingView.setBackgroundColor(mContext.getResources().getColor(android.R.color.black));
         paddingView.setLayoutParams(mVideoView.getLayoutParams());

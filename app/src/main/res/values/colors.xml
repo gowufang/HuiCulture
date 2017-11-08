@@ -7,7 +7,7 @@
     <color name="colorGray">#636161</color>
     <color name="Background">#ecebeb</color>
     <color name="white">#FFFFFF</color>
-
+    <color name="red">#cc0000</color>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <color name="color_333333">#333333</color>
     <color name="color_cccccc">#cccccc</color>

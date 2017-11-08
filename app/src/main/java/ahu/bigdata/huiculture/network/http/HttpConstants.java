@@ -22,7 +22,7 @@ public class HttpConstants {
     public static final String LASTED_ARTICLE = "/api/article/lastest";
 
 
-
+    /****************************************************************/
     /**
      * 方便切换服务器地址
      */

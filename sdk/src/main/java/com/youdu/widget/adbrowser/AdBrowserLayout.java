@@ -118,11 +118,7 @@ public final class AdBrowserLayout extends RelativeLayout {
                                   LayoutParams pb_params) {
         RelativeLayout backLayout = new RelativeLayout(context);
         backLayout.setLayoutParams(buttons_params);
-        if (Build.VERSION.SDK_INT < 16) {
-            mBackBtn.setBackgroundDrawable(Utils.decodeImage(mBase64Drawables.getBackInactive()));
-        } else {
-            mBackBtn.setBackground(Utils.decodeImage(mBase64Drawables.getBackInactive()));
-        }
+        mBackBtn.setBackground(Utils.decodeImage(mBase64Drawables.getBackInactive()));
         mBackBtn.setLayoutParams(pb_params);
         backLayout.addView(mBackBtn);
         buttonsContainer.addView(backLayout);
@@ -134,11 +130,7 @@ public final class AdBrowserLayout extends RelativeLayout {
                                      LayoutParams pb_params) {
         RelativeLayout refreshLayout = new RelativeLayout(context);
         refreshLayout.setLayoutParams(buttons_params);
-        if (Build.VERSION.SDK_INT < 16) {
-            mRefreshBtn.setBackgroundDrawable(Utils.decodeImage(mBase64Drawables.getRefresh()));
-        } else {
-            mRefreshBtn.setBackground(Utils.decodeImage(mBase64Drawables.getRefresh()));
-        }
+        mRefreshBtn.setBackground(Utils.decodeImage(mBase64Drawables.getRefresh()));
         mRefreshBtn.setLayoutParams(pb_params);
         refreshLayout.addView(mRefreshBtn);
         buttonsContainer.addView(refreshLayout);
@@ -150,11 +142,7 @@ public final class AdBrowserLayout extends RelativeLayout {
                                     LayoutParams pb_params) {
         RelativeLayout nativeLayout = new RelativeLayout(context);
         nativeLayout.setLayoutParams(buttons_params);
-        if (Build.VERSION.SDK_INT < 16) {
-            mNativeBtn.setBackgroundDrawable(Utils.decodeImage(mBase64Drawables.getNativeBrowser()));
-        } else {
-            mNativeBtn.setBackground(Utils.decodeImage(mBase64Drawables.getNativeBrowser()));
-        }
+        mNativeBtn.setBackground(Utils.decodeImage(mBase64Drawables.getNativeBrowser()));
         mNativeBtn.setLayoutParams(pb_params);
         nativeLayout.addView(mNativeBtn);
         buttonsContainer.addView(nativeLayout);
@@ -166,11 +154,7 @@ public final class AdBrowserLayout extends RelativeLayout {
                                    LayoutParams pb_params) {
         RelativeLayout closeLayout = new RelativeLayout(context);
         closeLayout.setLayoutParams(buttons_params);
-        if (Build.VERSION.SDK_INT < 16) {
-            mCloseBtn.setBackgroundDrawable(Utils.decodeImage(mBase64Drawables.getClose()));
-        } else {
-            mCloseBtn.setBackground(Utils.decodeImage(mBase64Drawables.getClose()));
-        }
+        mCloseBtn.setBackground(Utils.decodeImage(mBase64Drawables.getClose()));
         mCloseBtn.setLayoutParams(pb_params);
         closeLayout.addView(mCloseBtn);
         buttonsContainer.addView(closeLayout);
